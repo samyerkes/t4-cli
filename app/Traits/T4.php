@@ -15,6 +15,14 @@ Trait T4
         return collect($response->json());
     }
 
+    public function findUser($details)
+    {
+        $url = '/user';
+        $data = $this->getContent($url);
+        $data = $this->getFilteredContent($data, ['username', $details]);
+        return $data->first();
+    }
+
     public function getFilteredContent($data, $filter)
     {
         if ($filter[0] == '') return $data;
