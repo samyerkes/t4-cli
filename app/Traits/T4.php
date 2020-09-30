@@ -15,6 +15,16 @@ Trait T4
         return collect($response->json());
     }
 
+    public function getFilteredContent($data, $filter)
+    {
+        if ($filter[0] == '') return $data;
+
+        return $data->filter(function ($d) use ($filter) {
+            list($attr, $val) = $filter;
+            return $d[$attr] == $val;
+        });
+    }
+
     public function formatOutput($model, $fields)
     {
         $string = '';
