@@ -5,7 +5,7 @@ namespace App\Commands\Users;
 use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\T4;
 
-class UserList extends Command
+class UserGet extends Command
 {
     use T4;
     
@@ -14,15 +14,15 @@ class UserList extends Command
      *
      * @var string
      */
-    protected $signature = 'user:list
-                            {--fields=username : Instead of returning the whole user, returns the value of a specified field. (optional)}';
+    protected $signature = 'user:get {user}
+                            {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'List users';
+    protected $description = 'Gets details about a user';
 
     /**
      * Execute the console command.
@@ -31,16 +31,17 @@ class UserList extends Command
      */
     public function handle()
     {
+        $user = $this->argument('user');
         $fields = $this->option('fields');
         $fields = explode(',', $fields);
 
         $url = '/user';
         $data = $this->getContent($url);
 
-        $data->each(function ($user) use ($fields) {
-            $output = $this->formatOutput($user, $fields);
-            $this->line($output);
-        });
+        $user = $data->firstWhere('username', $user);
+
+        $output = $this->formatOutput($user, $fields);
+        $this->line($output);
 
     }
 

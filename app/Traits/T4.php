@@ -15,4 +15,13 @@ Trait T4
         return collect($response->json());
     }
 
+    public function formatOutput($model, $fields)
+    {
+        $string = '';
+        foreach ($fields as $key => $field) {
+            $space = ($key !== 0) ? ' ' : '';
+            $string .= $space . $model[$field];
+        }
+        return $string;
+    }
 }
