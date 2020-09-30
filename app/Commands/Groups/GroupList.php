@@ -39,8 +39,7 @@ class GroupList extends Command
         $filter = explode(':', $filter);
 
         if ($user) {
-            $user = $this->findUser($user);
-            $user = $user['id'];
+            $user = $this->findUserID($user);
         }
 
         $url = $user ? "/group/user/{$user}" : '/group';

@@ -14,13 +14,30 @@ Trait T4
         $response = Http::withToken($t4key)->get($t4base . $url);
         return collect($response->json());
     }
+    
+    public function postContent($url, $data) {
+        $t4key = config('t4.token');
+        $t4base = config('t4.base');
+        $response = Http::withToken($t4key)->post($t4base . $url, $data);
+        return collect($response->json());
+    }
 
-    public function findUser($details)
+    public function findUserID($details)
     {
         $url = '/user';
         $data = $this->getContent($url);
         $data = $this->getFilteredContent($data, ['username', $details]);
-        return $data->first();
+        $user = $data->first();
+        return $user['id'];
+    }
+
+    public function findGroupID($details)
+    {
+        $url = '/group';
+        $data = $this->getContent($url);   
+        $data = $this->getFilteredContent($data, ['name', $details]);
+        $group = $data->first();
+        return $group['id'];
     }
 
     public function getFilteredContent($data, $filter)
