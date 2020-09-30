@@ -38,7 +38,7 @@ class ScheduleList extends Command
         $filter = explode(':', $filter);
 
         $url = '/schedule';
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
 
         $data = $this->getFilteredContent($data, $filter);
 

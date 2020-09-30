@@ -43,7 +43,7 @@ class GroupList extends Command
         }
 
         $url = $user ? "/group/user/{$user}" : '/group';
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
 
         $data = $this->getFilteredContent($data, $filter);
 

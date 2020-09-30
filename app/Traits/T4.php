@@ -7,22 +7,9 @@ use LaravelZero\Framework\Commands\Command as LaravelCommand;
 
 Trait T4
 {
-
-    public function getContent($url) {
-        $t4key = config('t4.token');
-        $t4base = config('t4.base');
-        $response = Http::withToken($t4key)->get($t4base . $url);
-        if ($response->ok()) return collect($response->json());
-    }
-    
-    public function postContent($url, $data) {
-        $t4key = config('t4.token');
-        $t4base = config('t4.base');
-        $response = Http::withToken($t4key)->post($t4base . $url, $data);
-        if ($response->ok()) return collect($response->json());
-    }
-    
-    public function sendRequest($method, $url, $data=[]) {
+    // Defaults to a get request if other arguments are not provided
+    public function sendRequest($url, $method='get', $data=[]) {
+        $method = strtolower($method);
         $t4key = config('t4.token');
         $t4base = config('t4.base');
         $response = Http::withToken($t4key)->$method($t4base . $url, $data);
@@ -32,7 +19,7 @@ Trait T4
     public function findUserID($details)
     {
         $url = '/user';
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
         $data = $this->getFilteredContent($data, ['username', $details]);
         $user = $data->first();
         return $user['id'];
@@ -41,7 +28,7 @@ Trait T4
     public function findGroupID($details)
     {
         $url = '/group';
-        $data = $this->getContent($url);   
+        $data = $this->sendRequest($url);   
         $data = $this->getFilteredContent($data, ['name', $details]);
         $group = $data->first();
         return $group['id'];

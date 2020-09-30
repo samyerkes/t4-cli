@@ -38,7 +38,7 @@ class UserList extends Command
         $filter = explode(':', $filter);
 
         $url = '/user';
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
 
         $data = $this->getFilteredContent($data, $filter);
 

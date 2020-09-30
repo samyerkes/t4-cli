@@ -34,7 +34,7 @@ class GroupCreate extends Command
         $description = $this->argument('description');
 
         $url = '/group';
-        $data = $this->postContent($url, [
+        $data = $this->sendRequest($url, 'post', [
             'name' => $name,
             'description' => $description
         ]);

@@ -36,7 +36,7 @@ class UserGet extends Command
         $fields = explode(',', $fields);
 
         $url = '/user';
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
 
         $user = $data->firstWhere('username', $user);
 

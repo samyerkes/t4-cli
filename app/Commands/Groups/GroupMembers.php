@@ -41,7 +41,7 @@ class GroupMembers extends Command
 
         $groupId = $this->findGroupID($name);
         $url = "/group/{$groupId}";
-        $data = $this->getContent($url);
+        $data = $this->sendRequest($url);
 
         $data = $this->getFilteredContent($data, $filter);
 

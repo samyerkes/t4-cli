@@ -35,7 +35,7 @@ class GroupDelete extends Command
         $groupId = $this->findGroupID($name);
 
         $url = "/group/{$groupId}";
-        $data = $this->sendRequest('delete', $url);
+        $data = $this->sendRequest($url, 'delete');
 
         $this->info("Success: Deleted group {$name}");
 
