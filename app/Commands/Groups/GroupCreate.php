@@ -2,13 +2,13 @@
 
 namespace App\Commands\Groups;
 
-use LaravelZero\Framework\Commands\Command as Command;
+use LaravelZero\Framework\Commands\Command;
 use App\Traits\T4;
 
 class GroupCreate extends Command
 {
     use T4;
-    
+
     /**
      * The signature of the command.
      *
@@ -21,7 +21,7 @@ class GroupCreate extends Command
      *
      * @var string
      */
-    protected $description = 'Creates a groups';
+    protected $description = 'Creates a group';
 
     /**
      * Execute the console command.
@@ -38,11 +38,8 @@ class GroupCreate extends Command
             'name' => $name,
             'description' => $description
         ]);
-        
-        list($name) = $data;
 
         $this->info("Success: Created group {$name}");
-
     }
 
 }

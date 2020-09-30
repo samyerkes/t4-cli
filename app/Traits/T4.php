@@ -12,14 +12,21 @@ Trait T4
         $t4key = config('t4.token');
         $t4base = config('t4.base');
         $response = Http::withToken($t4key)->get($t4base . $url);
-        return collect($response->json());
+        if ($response->ok()) return collect($response->json());
     }
     
     public function postContent($url, $data) {
         $t4key = config('t4.token');
         $t4base = config('t4.base');
         $response = Http::withToken($t4key)->post($t4base . $url, $data);
-        return collect($response->json());
+        if ($response->ok()) return collect($response->json());
+    }
+    
+    public function sendRequest($method, $url, $data=[]) {
+        $t4key = config('t4.token');
+        $t4base = config('t4.base');
+        $response = Http::withToken($t4key)->$method($t4base . $url, $data);
+        if ($response->ok()) return collect($response->json());
     }
 
     public function findUserID($details)
