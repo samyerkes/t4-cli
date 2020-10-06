@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^7.3",
+        "dnoegel/php-xdg-base-dir": "^0.1.1",
         "guzzlehttp/guzzle": "^6.5.5",
         "illuminate/http": "^8.0",
         "laminas/laminas-text": "^2.7",

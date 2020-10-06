@@ -11,8 +11,8 @@ Trait T4
     public function sendRequest($url, $method='get', $data=[]) {
         $method = strtolower($method);
         $t4key = config('t4.token');
-        $t4base = config('t4.base');
-        $response = Http::withToken($t4key)->$method($t4base . $url, $data);
+        $t4webapi = config('t4.webapi');
+        $response = Http::withToken($t4key)->$method($t4webapi . $url, $data);
         if ($response->ok()) return collect($response->json());
     }
 
