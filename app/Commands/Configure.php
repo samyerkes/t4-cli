@@ -19,7 +19,7 @@ class Configure extends Command
      *
      * @var string
      */
-    protected $description = 'Configures CLI to point to your installation of T4';
+    protected $description = 'Configures the CLI to point to your installation of T4';
 
     /**
      * Execute the console command.
