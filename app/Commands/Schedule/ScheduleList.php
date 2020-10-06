@@ -3,11 +3,11 @@
 namespace App\Commands\Schedule;
 
 use LaravelZero\Framework\Commands\Command as Command;
-use App\Traits\T4;
+use App\Traits\T4able;
 
 class ScheduleList extends Command
 {
-    use T4;
+    use T4able;
     
     /**
      * The signature of the command.

@@ -3,11 +3,11 @@
 namespace App\Commands\Users;
 
 use LaravelZero\Framework\Commands\Command as Command;
-use App\Traits\T4;
+use App\Traits\T4able;
 
 class UserList extends Command
 {
-    use T4;
+    use T4able;
     
     /**
      * The signature of the command.

@@ -5,7 +5,7 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Http;
 use LaravelZero\Framework\Commands\Command as LaravelCommand;
 
-Trait T4
+Trait T4able
 {
     // Defaults to a get request if other arguments are not provided
     public function sendRequest($url, $method='get', $data=[]) {

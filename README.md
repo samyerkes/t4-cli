@@ -12,3 +12,8 @@
 | t4 schedule:list | Lists schedules                |                                      | --fields --filter |
 | t4 user:get      | Gets details about a user      | {user}                               | --fields          |
 | t4 user:list     | List users                     |                                      | --fields --filter |
+
+## Output
+
+* table
+* json ?
