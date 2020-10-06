@@ -2,6 +2,8 @@
 
 | Command          | Description                    | Arguments                            | Flags             |
 | ---------------- |--------------------------------|--------------------------------------|-------------------|
+| t4 channel:get   | Gets details about a channel   | {channel}                            | --fields          |
+| t4 channel:list  | List channel                   |                                      | --fields --filter |
 | t4 group:create  | Creates a group                | {groupname} {description} (optional) |                   |
 | t4 group:delete  | Delets a group                 | {groupname}                          |                   |
 | t4 group:list    | Lists groups                   | {user} (optional)                    | --fields --filter |
