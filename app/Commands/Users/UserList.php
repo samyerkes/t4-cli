@@ -3,11 +3,12 @@
 namespace App\Commands\Users;
 
 use LaravelZero\Framework\Commands\Command as Command;
+use App\Traits\Customizable;
 use App\Traits\T4able;
 
 class UserList extends Command
 {
-    use T4able;
+    use Customizable, T4able;
     
     /**
      * The signature of the command.
@@ -32,10 +33,9 @@ class UserList extends Command
      */
     public function handle()
     {
-        $fields = $this->option('fields');
-        $filter = $this->option('filter');
-        $fields = explode(',', $fields);
-        $filter = explode(':', $filter);
+        $fields = $this->fields($this->option('fields'));
+
+        $filter = $this->filter($this->option('filter'));
 
         $url = '/user';
         $data = $this->sendRequest($url);

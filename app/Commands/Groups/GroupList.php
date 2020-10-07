@@ -3,11 +3,12 @@
 namespace App\Commands\Groups;
 
 use LaravelZero\Framework\Commands\Command as Command;
+use App\Traits\Customizable;
 use App\Traits\T4able;
 
 class GroupList extends Command
 {
-    use T4able;
+    use Customizable, T4able;
     
     /**
      * The signature of the command.
@@ -33,10 +34,10 @@ class GroupList extends Command
     public function handle()
     {
         $user = $this->argument('user');
-        $fields = $this->option('fields');
-        $filter = $this->option('filter');
-        $fields = explode(',', $fields);
-        $filter = explode(':', $filter);
+
+        $fields = $this->fields($this->option('fields'));
+
+        $filter = $this->filter($this->option('filter'));
 
         if ($user) {
             $user = $this->findUserID($user);

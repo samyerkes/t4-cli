@@ -3,11 +3,12 @@
 namespace App\Commands\Channels;
 
 use LaravelZero\Framework\Commands\Command as Command;
+use App\Traits\Customizable;
 use App\Traits\T4able;
 
 class ChannelGet extends Command
 {
-    use T4able;
+    use Customizable, T4able;
     
     /**
      * The signature of the command.
@@ -32,8 +33,8 @@ class ChannelGet extends Command
     public function handle()
     {
         $channel = $this->argument('channel');
-        $fields = $this->option('fields');
-        $fields = explode(',', $fields);
+        
+        $fields = $this->fields($this->option('fields'));
 
         $url = '/channel';
         $data = $this->sendRequest($url);

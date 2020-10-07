@@ -3,11 +3,12 @@
 namespace App\Commands\Users;
 
 use LaravelZero\Framework\Commands\Command as Command;
+use App\Traits\Customizable;
 use App\Traits\T4able;
 
 class UserGet extends Command
 {
-    use T4able;
+    use Customizable, T4able;
     
     /**
      * The signature of the command.
@@ -32,8 +33,8 @@ class UserGet extends Command
     public function handle()
     {
         $user = $this->argument('user');
-        $fields = $this->option('fields');
-        $fields = explode(',', $fields);
+        
+        $fields = $this->fields($this->option('fields'));
 
         $url = '/user';
         $data = $this->sendRequest($url);
