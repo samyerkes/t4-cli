@@ -93,5 +93,25 @@ Trait Customizable
                 $this->table(array_keys($data[0]), $data);
         }
     }
+
+    public function convertTimestampToHumanReadable($data, $timestamps) {
+        $timezone = config('app.timezone');
+
+        // Check if any of the data that has been filtered out is a timestamp
+        $first = array_keys($data[0]);
+        $timestamps = array_intersect($first, $timestamps);
+        
+        // If not then just do an early return
+        if (!$timestamps) return $data;
+        
+        foreach ($data as $dkey => $d) {
+            foreach ($timestamps as $key) {
+                $timestamp = $d[$key];
+                $data[$dkey][$key] = \Carbon\Carbon::createFromTimestamp($timestamp / 1000, $timezone);
+            }
+        }
+
+        return $data;
+    }
     
 }

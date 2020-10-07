@@ -34,6 +34,11 @@ class ScheduleList extends Command
      */
     public function handle()
     {
+        $timestampFields = [
+            'creationDate',
+            'nextDue'
+        ];
+
         $url = '/schedule';
         $data = $this->sendRequest($url);
 
@@ -44,8 +49,10 @@ class ScheduleList extends Command
         $format = $this->option('format');
 
         $data = $this->getFilteredContent($data, $filter);
-
+        
         $data = $this->getFieldsOfContent($data, $fields);
+        
+        $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
 
         $this->printWithFormatter($data, $format);
 

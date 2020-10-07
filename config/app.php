@@ -42,6 +42,8 @@ return [
 
     'env' => 'development',
 
+    'timezone' => 'America/New_York',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
