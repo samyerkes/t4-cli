@@ -16,7 +16,8 @@ class ChannelGet extends Command
      * @var string
      */
     protected $signature = 'channel:get {channel}
-                            {--fields=name : Instead of returning the whole channel, returns the value of a specified field. (optional)}';
+                            {--fields=id,name : Instead of returning the whole channel, returns the value of a specified field.}
+                            {--format=table}';
 
     /**
      * The description of the command.
@@ -34,15 +35,18 @@ class ChannelGet extends Command
     {
         $channel = $this->argument('channel');
         
-        $fields = $this->fields($this->option('fields'));
-
         $url = '/channel';
         $data = $this->sendRequest($url);
 
-        $channel = $data->firstWhere('name', $channel);
+        $fields = $this->fields($this->option('fields'));
 
-        $output = $this->formatOutput($channel, $fields);
-        $this->line($output);
+        $format = $this->option('format');
+
+        $data = $data->firstWhere('name', $channel);
+
+        $data = $this->getFieldsOfContent($data, $fields);
+
+        $this->printWithFormatter($data, $format);
 
     }
 

@@ -16,8 +16,9 @@ class GroupMembers extends Command
      * @var string
      */
     protected $signature = 'group:members {name}
-                            {--fields=username : Instead of returning the whole group, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all groups, returns the groups who only match a specific filter. (optional)}';
+                            {--fields=id,username : Instead of returning the whole group, returns the value of a specified field.}
+                            {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
+                            {--format=table}';
 
     /**
      * The description of the command.
@@ -34,23 +35,26 @@ class GroupMembers extends Command
     public function handle()
     {
         $name = $this->argument('name');
-
-        $fields = $this->fields($this->option('fields'));
         
-        $filter = $this->filter($this->option('filter'));
-
         $groupId = $this->findGroupID($name);
+
         $url = "/group/{$groupId}";
+
         $data = $this->sendRequest($url);
 
+        $data = collect($data['members']);
+
+        $filter = $this->filter($this->option('filter'));
+        
         $data = $this->getFilteredContent($data, $filter);
+        
+        $fields = $this->fields($this->option('fields'));
+        
+        $data = $this->getFieldsOfContent($data, $fields);
+        
+        $format = $this->option('format');
 
-        $members = collect($data['members']);
-
-        $members->each(function ($group) use ($fields) {
-            $output = $this->formatOutput($group, $fields);
-            $this->line($output);
-        });
+        $this->printWithFormatter($data, $format);
 
     }
 

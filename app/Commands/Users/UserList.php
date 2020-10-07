@@ -16,8 +16,9 @@ class UserList extends Command
      * @var string
      */
     protected $signature = 'user:list
-                            {--fields=username : Instead of returning the whole user, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all users, returns the users who only match a specific filter. (optional)}';
+                            {--fields=id,username,firstName,lastName,emailAddress : Instead of returning the whole user, returns the value of a specified field.}
+                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
+                            {--format=table}';
 
     /**
      * The description of the command.
@@ -33,20 +34,21 @@ class UserList extends Command
      */
     public function handle()
     {
-        $fields = $this->fields($this->option('fields'));
-
-        $filter = $this->filter($this->option('filter'));
-
         $url = '/user';
         $data = $this->sendRequest($url);
 
+        $fields = $this->fields($this->option('fields'));
+
+        $filter = $this->filter($this->option('filter'));
+        
+        $format = $this->option('format');
+
         $data = $this->getFilteredContent($data, $filter);
 
-        $data->each(function ($user) use ($fields) {
-            $output = $this->formatOutput($user, $fields);
-            $this->line($output);
-        });
+        $data = $this->getFieldsOfContent($data, $fields);
 
+        $this->printWithFormatter($data, $format);
+        
     }
 
 }

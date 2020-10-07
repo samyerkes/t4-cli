@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use LaravelZero\Framework\Commands\Command as LaravelCommand;
 
 Trait T4able
 {
@@ -20,37 +20,22 @@ Trait T4able
     {
         $url = '/user';
         $data = $this->sendRequest($url);
-        $data = $this->getFilteredContent($data, ['username', $details]);
-        $user = $data->first();
-        return $user['id'];
+        $data = $data->filter(function($d) use ($details) {
+            return $d['username'] == $details;
+        });
+        $data = array_values($data->toArray());
+        return $data[0]['id'];
     }
 
     public function findGroupID($details)
     {
         $url = '/group';
         $data = $this->sendRequest($url);   
-        $data = $this->getFilteredContent($data, ['name', $details]);
-        $group = $data->first();
-        return $group['id'];
-    }
-
-    public function getFilteredContent($data, $filter)
-    {
-        if ($filter[0] == '') return $data;
-
-        return $data->filter(function ($d) use ($filter) {
-            list($attr, $val) = $filter;
-            return $d[$attr] == $val;
+        $data = $data->filter(function($d) use ($details) {
+            return $d['name'] == $details;
         });
+        $data = array_values($data->toArray());
+        return $data[0]['id'];
     }
 
-    public function formatOutput($model, $fields)
-    {
-        $string = '';
-        foreach ($fields as $key => $field) {
-            $space = ($key !== 0) ? ' ' : '';
-            $string .= $space . $model[$field];
-        }
-        return $string;
-    }
 }

@@ -16,7 +16,8 @@ class UserGet extends Command
      * @var string
      */
     protected $signature = 'user:get {user}
-                            {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}';
+                            {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
+                            {--format=table}';
 
     /**
      * The description of the command.
@@ -34,15 +35,18 @@ class UserGet extends Command
     {
         $user = $this->argument('user');
         
-        $fields = $this->fields($this->option('fields'));
-
         $url = '/user';
         $data = $this->sendRequest($url);
 
-        $user = $data->firstWhere('username', $user);
+        $fields = $this->fields($this->option('fields'));
 
-        $output = $this->formatOutput($user, $fields);
-        $this->line($output);
+        $format = $this->option('format');
+
+        $data = $data->firstWhere('username', $user);
+
+        $data = $this->getFieldsOfContent($data, $fields);
+
+        $this->printWithFormatter($data, $format);
 
     }
 
