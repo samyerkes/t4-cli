@@ -13,7 +13,12 @@ Trait T4able
         $t4key = config('t4.token');
         $t4webapi = config('t4.webapi');
         $response = Http::withToken($t4key)->$method($t4webapi . $url, $data);
-        if ($response->ok()) return collect($response->json());
+        
+        if (!$response->ok()) {
+            $this->error($response);
+        }
+
+        return collect($response->json());
     }
 
     public function findUserID($details)
