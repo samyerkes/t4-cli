@@ -18,7 +18,9 @@ class UserList extends Command
     protected $signature = 'user:list
                             {--fields=id,username,firstName,lastName,emailAddress : Instead of returning the whole user, returns the value of a specified field.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
-                            {--format=table}';
+                            {--format=table}
+                            {--sort=id}
+                            {--order=desc}';
 
     /**
      * The description of the command.
@@ -42,10 +44,16 @@ class UserList extends Command
         $filter = $this->filter($this->option('filter'));
         
         $format = $this->option('format');
-
+        
         $data = $this->getFilteredContent($data, $filter);
-
+        
         $data = $this->getFieldsOfContent($data, $fields);
+        
+        $sortField = $this->option('sort');
+
+        $sortOrder = $this->option('order');
+
+        $data = $this->sortContent($data, $sortField, $sortOrder);
 
         $this->printWithFormatter($data, $format);
         

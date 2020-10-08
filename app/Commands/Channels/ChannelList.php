@@ -18,7 +18,9 @@ class ChannelList extends Command
     protected $signature = 'channel:list
                             {--fields=name : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all channels, returns the channels who only match a specific filter.}
-                            {--format=table}';
+                            {--format=table}
+                            {--sort=id}
+                            {--order=desc}';
 
     /**
      * The description of the command.
@@ -46,6 +48,12 @@ class ChannelList extends Command
         $data = $this->getFilteredContent($data, $filter);
 
         $data = $this->getFieldsOfContent($data, $fields);
+
+        $sortField = $this->option('sort');
+
+        $sortOrder = $this->option('order');
+
+        $data = $this->sortContent($data, $sortField, $sortOrder);
 
         $this->printWithFormatter($data, $format);
 

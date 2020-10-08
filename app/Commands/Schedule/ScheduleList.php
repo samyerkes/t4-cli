@@ -18,7 +18,9 @@ class ScheduleList extends Command
     protected $signature = 'schedule:list
                             {--fields=id,name,nextDue : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all schedules, returns the schedules who only match a specific filter. (optional)}
-                            {--format=table}';
+                            {--format=table}
+                            {--sort=id}
+                            {--order=desc}';
 
     /**
      * The description of the command.
@@ -53,6 +55,12 @@ class ScheduleList extends Command
         $data = $this->getFieldsOfContent($data, $fields);
         
         $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
+
+        $sortField = $this->option('sort');
+
+        $sortOrder = $this->option('order');
+
+        $data = $this->sortContent($data, $sortField, $sortOrder);
 
         $this->printWithFormatter($data, $format);
 

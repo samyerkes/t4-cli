@@ -113,5 +113,16 @@ Trait Customizable
 
         return $data;
     }
+
+    public function sortContent($data, $sortField, $sortOrder)
+    {
+        if (!in_array($sortOrder, array('asc', 'desc'), true )) return $data;
+
+        $data = collect($data)->sortBy($sortField);
+        if ($sortOrder == 'asc') {
+            $data = $data->reverse();
+        }
+        return $data->toArray();
+    }
     
 }
