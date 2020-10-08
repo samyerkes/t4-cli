@@ -15,9 +15,11 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $signature = 'user:get {user}
+    protected $signature = 'user:get {user*}
                             {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
-                            {--format=table}';
+                            {--format=table}
+                            {--sort=id}
+                            {--order=desc}';
 
     /**
      * The description of the command.
@@ -42,9 +44,22 @@ class UserGet extends Command
 
         $format = $this->option('format');
 
-        $data = $data->firstWhere('username', $user);
+        
+        $data = $data->filter( function($d) use ($user) {
+            return in_array($d['username'], $user);
+        });
+        
+        $data = $data->toArray();
+
+        $data = array_values($data);
 
         $data = $this->getFieldsOfContent($data, $fields);
+
+        $sortField = $this->option('sort');
+
+        $sortOrder = $this->option('order');
+
+        $data = $this->sortContent($data, $sortField, $sortOrder);
 
         $this->printWithFormatter($data, $format);
 
