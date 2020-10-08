@@ -17,7 +17,7 @@ Command architecture inspired by the [WP-CLI](https://wp-cli.org/) project.
 
 ## Output
 
-You have the ability to format output from commands with the following options:
+Using the --format flag, you have the ability to format output with the following options:
 
 * count - returns the number of results
 * csv - returns the results as a comma deliniated rows
