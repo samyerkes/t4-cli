@@ -13,7 +13,7 @@ Command architecture inspired by the [WP-CLI](https://wp-cli.org/) project.
 | t4 group:members | Returns the members of a group             | {groupname}                          | --fields --filter --format --order --sort | Table          |
 | t4 key:list      | List API keys                              |                                      | --fields --filter --format --order --sort | Table          |
 | t4 schedule:list | Lists schedules                            |                                      | --fields --filter --format --order --sort | Table          |
-| t4 user:get      | Gets details about a user                  | {user*}                              | --fields --format --order --sort          | Table          |
+| t4 user:get      | Gets details about a user                  | {userDetails*}                              | --fields --format --order --sort          | Table          |
 | t4 user:list     | List users                                 |                                      | --fields --filter --format --order --sort | Table          |
 | t4 whoami        | Displays information about the auth'd user |                                      | --fields --format                         | Table          |
 
