@@ -7,6 +7,7 @@ Command architecture inspired by the [WP-CLI](https://wp-cli.org/) project.
 | t4 configure         | Configures the CLI                         |                                      |                                           | None           |
 | t4 channel:get       | Gets details about a channel               | {channel}                            | --fields --format                         | Table          |
 | t4 channel:list      | List channel                               |                                      | --fields --filter --format --order --sort | Table          |
+| t4 contenttypes:get  | Gets details about a content type          | {contentTypeDetails*}                | --fields --format --order --sort          | Table          |
 | t4 contenttypes:list | List content types                         |                                      | --fields --filter --format --order --sort | Table          |
 | t4 group:create      | Creates a group                            | {groupname} {description?}           |                                           | None           |
 | t4 group:delete      | Delets a group                             | {groupname}                          |                                           | None           |

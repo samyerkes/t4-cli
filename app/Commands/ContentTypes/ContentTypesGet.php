@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Commands\Users;
+namespace App\Commands\ContentTypes;
 
 use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\Customizable;
 use App\Traits\T4able;
 
-class UserGet extends Command
+class ContentTypesGet extends Command
 {
     use Customizable, T4able;
     
@@ -15,8 +15,8 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $signature = 'user:get {userDetails*}
-                            {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
+    protected $signature = 'contenttype:get {contentTypeDetails*}
+                            {--fields=id,alias,description : Return specific fields.}
                             {--format=table}
                             {--sort=id}
                             {--order=desc}';
@@ -26,7 +26,7 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $description = 'Gets details about one or more specific users.';
+    protected $description = 'Gets details about one or more specific content types.';
 
     /**
      * Execute the console command.
@@ -35,19 +35,22 @@ class UserGet extends Command
      */
     public function handle()
     {
-        $userDetail = $this->argument('userDetails');
+        /**
+         * Note: the content type name is the original name added to the system. This command will use the alias attribute since that's the up to date attribute that people would normally use to look up a content type.
+         */
+        $contentTypeDetails = $this->argument('contentTypeDetails');
         
-        $url = '/user';
+        $url = '/contenttype';
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));
 
         $format = $this->option('format');
 
-        $data = $data->filter( function($d) use ($userDetail) {
-            $attr = ['id', 'username'];
+        $data = $data->filter( function($d) use ($contentTypeDetails) {
+            $attr = ['id', 'alias'];
             foreach($attr as $a) {
-                if (in_array($d[$a], $userDetail)) return true;
+                if (in_array($d[$a], $contentTypeDetails)) return true;
             }
             return false;
         });
