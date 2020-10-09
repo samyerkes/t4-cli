@@ -41,7 +41,7 @@ class ScheduleList extends Command
             'nextDue'
         ];
 
-        $url = '/schedule';
+        $url = __('api.schedule.index');
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

@@ -40,7 +40,7 @@ class ContentTypesGet extends Command
          */
         $contentTypeDetails = $this->argument('contentTypeDetails');
         
-        $url = '/contenttype';
+        $url = __('api.contenttype.index');
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

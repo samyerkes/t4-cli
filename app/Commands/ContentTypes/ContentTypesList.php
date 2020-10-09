@@ -16,7 +16,7 @@ class ContentTypesList extends Command
      * @var string
      */
     protected $signature = 'contenttype:list
-                            {--fields=id,name : Instead of returning the whole content type, returns the value of a specified field.}
+                            {--fields=id,alias : Instead of returning the whole content type, returns the value of a specified field.}
                             {--filter= : Instead of returning all content types, returns the content types who only match a specific filter.}
                             {--format=table}
                             {--sort=id}
@@ -36,7 +36,8 @@ class ContentTypesList extends Command
      */
     public function handle()
     {
-        $url = '/contenttype';
+        $url = __('api.contenttype.index');
+
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

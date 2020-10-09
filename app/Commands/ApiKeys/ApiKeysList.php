@@ -43,7 +43,8 @@ class ApiKeysList extends Command
             'invalidationDate'
         ];
 
-        $url = '/apikey/list';
+        $url = __('api.keys.index');
+        
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

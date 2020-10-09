@@ -35,7 +35,8 @@ class ChannelGet extends Command
     {
         $channel = $this->argument('channel');
         
-        $url = '/channel';
+        $url = __('api.channel.index');
+        
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

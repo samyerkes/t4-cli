@@ -42,7 +42,8 @@ class GroupList extends Command
             $userId = $this->findUserID($user);
         }
 
-        $url = $user ? "/group/user/{$userId}" : '/group';
+        $url = $user ? __('api.group.user', ['user' => $userId]) : __('api.group.index');
+        
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

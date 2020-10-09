@@ -34,7 +34,8 @@ class Whoami extends Command
     public function handle()
     {
         
-        $url = '/profile';
+        $url = __('api.profile');
+        
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

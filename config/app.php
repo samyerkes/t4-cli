@@ -44,6 +44,8 @@ return [
 
     'timezone' => 'America/New_York',
 
+    'lang' => 'en',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -57,6 +59,7 @@ return [
 
     'providers' => [
         App\Providers\AppServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
     ],
 
 ];

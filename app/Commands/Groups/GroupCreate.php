@@ -33,7 +33,7 @@ class GroupCreate extends Command
         $name = $this->argument('name');
         $description = $this->argument('description');
 
-        $url = '/group';
+        $url = __('api.group.index');
         $data = $this->sendRequest($url, 'post', [
             'name' => $name,
             'description' => $description

@@ -37,7 +37,8 @@ class UserGet extends Command
     {
         $userDetail = $this->argument('userDetails');
         
-        $url = '/user';
+        $url = __('api.user.index');
+
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

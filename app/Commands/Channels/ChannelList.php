@@ -16,7 +16,7 @@ class ChannelList extends Command
      * @var string
      */
     protected $signature = 'channel:list
-                            {--fields=name : Instead of returning the whole channel, returns the value of a specified field.}
+                            {--fields=id,name : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all channels, returns the channels who only match a specific filter.}
                             {--format=table}
                             {--sort=id}
@@ -36,7 +36,8 @@ class ChannelList extends Command
      */
     public function handle()
     {
-        $url = '/channel';
+        $url = __('api.channel.index');
+
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));

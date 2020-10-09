@@ -36,7 +36,7 @@ class TransferList extends Command
      */
     public function handle()
     {
-        $url = '/transfer';
+        $url = __('api.transfer.index');
         $data = $this->sendRequest($url);
 
         $fields = $this->fields($this->option('fields'));
