@@ -29,3 +29,18 @@ Using the --format flag, you have the ability to format output with the followin
 * id - returns only the ids of the results. If selected you must either not use the fields option (sticking with the defaults) or ensure to include the id as a field.
 * json - returns the results json encoded
 * table - returns the results in an easy to read table.
+
+## Profile
+
+If you want to use multiple instances of T4 you can define additional profiles in your .t4 file. Each profile is defined as:
+
+```
+[name]
+t4_url="https://cms.school.edu"
+t4_webapi="https://cms.school.edu/terminalfour/rs"
+t4_token="xxxxxxxxx"
+```
+
+To switch your profile just export a new `T4_PROFILE` variable. 
+
+```export T4_PROFILE=profileName```

@@ -38,13 +38,15 @@ class Configure extends Command
         
         }
 
+        $profileName = $this->ask('What do you want to call this profile?', 'default');
+
         $base = $this->ask('What is the base url of the T4 instance you\'re working with?', 'https://cms.school.edu');
 
         $webapi = $this->ask('What is the web api url of the T4 instance you\'re working with?', $base . '/terminalfour/rs');
 
         $token = $this->ask('What is the api token you want you use?');
         
-        $configurationString = "BASEURL=\"{$base}\"\nWEBAPI=\"{$webapi}\"\nTOKEN=\"{$token}\"";
+        $configurationString = "[$profileName]\nt4_url=\"$base\"\nt4_webapi=\"$webapi\"\nt4_token=\"$token\"";
         
         Storage::disk('home')->put($configurationFile, $configurationString);
     }
