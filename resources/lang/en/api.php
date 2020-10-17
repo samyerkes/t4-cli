@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'about' => [
+        'index' => '/about/general'
+    ],
     'channel' => [
         'index' => '/channel'
     ],

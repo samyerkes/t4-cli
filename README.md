@@ -1,24 +1,25 @@
 # T4 CLI
 
-Command architecture inspired by the [WP-CLI](https://wp-cli.org/) project.
+Command architecture inspired by the [WP-CLI](https://wp-cli.org/) and [AWS-CLI](https://docs.aws.amazon.com/cli/index.html) projects.
 
-| Command              | Description                                | Arguments                            | Flags                                     | Default Format |
-| -------------------- |--------------------------------------------|--------------------------------------|-------------------------------------------|----------------|
-| t4 configure         | Configures the CLI                         |                                      |                                           | None           |
-| t4 channel:get       | Gets details about a channel               | {channel}                            | --fields --format                         | Table          |
-| t4 channel:list      | List channel                               |                                      | --fields --filter --format --order --sort | Table          |
-| t4 contenttypes:get  | Gets details about a content type          | {contentTypeDetails*}                | --fields --format --order --sort          | Table          |
-| t4 contenttypes:list | List content types                         |                                      | --fields --filter --format --order --sort | Table          |
-| t4 group:create      | Creates a group                            | {groupname} {description?}           |                                           | None           |
-| t4 group:delete      | Delets a group                             | {groupname}                          |                                           | None           |
-| t4 group:list        | Lists groups                               | {user?}                              | --fields --filter --format --order --sort | Table          |
-| t4 group:members     | Returns the members of a group             | {groupname}                          | --fields --filter --format --order --sort | Table          |
-| t4 key:list          | List API keys                              |                                      | --fields --filter --format --order --sort | Table          |
-| t4 schedule:list     | Lists schedules                            |                                      | --fields --filter --format --order --sort | Table          |
-| t4 transfer:list     | Lists transfers                            |                                      | --fields --filter --format --order --sort | Table          |
-| t4 user:get          | Gets details about a user                  | {userDetails*}                       | --fields --format --order --sort          | Table          |
-| t4 user:list         | List users                                 |                                      | --fields --filter --format --order --sort | Table          |
-| t4 whoami            | Displays information about the auth'd user |                                      | --fields --format                         | Table          |
+| Command              | Description                                    | Arguments                            | Flags                                     | Default Format |
+| -------------------- |------------------------------------------------|--------------------------------------|-------------------------------------------|----------------|
+| t4 about             | Get details about the application, host and os |                                      | --fields --format                         | Table          |
+| t4 channel:get       | Gets details about a channel                   | {channel}                            | --fields --format                         | Table          |
+| t4 channel:list      | List channel                                   |                                      | --fields --filter --format --order --sort | Table          |
+| t4 configure         | Configures the CLI                             |                                      |                                           | None           |
+| t4 contenttypes:get  | Gets details about a content type              | {contentTypeDetails*}                | --fields --format --order --sort          | Table          |
+| t4 contenttypes:list | List content types                             |                                      | --fields --filter --format --order --sort | Table          |
+| t4 group:create      | Creates a group                                | {groupname} {description?}           |                                           | None           |
+| t4 group:delete      | Delets a group                                 | {groupname}                          |                                           | None           |
+| t4 group:list        | Lists groups                                   | {user?}                              | --fields --filter --format --order --sort | Table          |
+| t4 group:members     | Returns the members of a group                 | {groupname}                          | --fields --filter --format --order --sort | Table          |
+| t4 key:list          | List API keys                                  |                                      | --fields --filter --format --order --sort | Table          |
+| t4 schedule:list     | Lists schedules                                |                                      | --fields --filter --format --order --sort | Table          |
+| t4 transfer:list     | Lists transfers                                |                                      | --fields --filter --format --order --sort | Table          |
+| t4 user:get          | Gets details about a user                      | {userDetails*}                       | --fields --format --order --sort          | Table          |
+| t4 user:list         | List users                                     |                                      | --fields --filter --format --order --sort | Table          |
+| t4 whoami            | Displays information about the auth'd user     |                                      | --fields --format                         | Table          |
 
 ## Output
 
