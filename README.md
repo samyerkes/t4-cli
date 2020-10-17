@@ -32,6 +32,8 @@ Using the --format flag, you have the ability to format output with the followin
 
 ## Profile
 
+By default the application will use a profile named, "default."
+
 If you want to use multiple instances of T4 you can define additional profiles in your .t4 file. Each profile is defined as:
 
 ```
@@ -41,6 +43,6 @@ t4_webapi="https://cms.school.edu/terminalfour/rs"
 t4_token="xxxxxxxxx"
 ```
 
-To switch your profile just export a new `T4_PROFILE` variable. 
+To switch your profile just export a new `T4_PROFILE` variable.
 
 ```export T4_PROFILE=profileName```

@@ -32,9 +32,11 @@ class Configure extends Command
         
         if (Storage::disk('home')->exists($configurationFile)) {
         
-            $override = $this->confirm('Looks like you already have a configuration file. Do you want to override it with a new one?');
-            
-            if(!$override) return;
+            $writeOption = $this->choice('Looks like you already have a configuration file. What do you want to do?', ['Append', 'Overwrite'], 0);
+        
+        } else {
+
+            $writeOption = 'create';
         
         }
 
@@ -44,11 +46,28 @@ class Configure extends Command
 
         $webapi = $this->ask('What is the web api url of the T4 instance you\'re working with?', $base . '/terminalfour/rs');
 
-        $token = $this->ask('What is the api token you want you use?');
+        $token = $this->secret('What is the api token you want you use?');
         
-        $configurationString = "[$profileName]\nt4_url=\"$base\"\nt4_webapi=\"$webapi\"\nt4_token=\"$token\"";
+        $configurationString = "[$profileName]\nt4_url=\"$base\"\nt4_webapi=\"$webapi\"\nt4_token=\"$token\"\n";
+
+        if ($this->confirm('We are about to ' . strtolower($writeOption) .  ' your configuration file with this new profile. Are you sure you want to continue?')) {
+
+            $storage = Storage::disk('home');
+            
+            if ($writeOption == 'Append') {
+                $storage->append($configurationFile, $configurationString);
+            } else {
+                $storage->put($configurationFile, $configurationString);
+            }
+
+            $this->line('Profile configuration updated.');
+
+        } else {
+            
+            $this->line('Profile configuration cancelled.');
         
-        Storage::disk('home')->put($configurationFile, $configurationString);
+        }
+        
     }
 
 }
