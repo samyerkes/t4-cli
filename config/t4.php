@@ -20,33 +20,33 @@ $profile = $profile[0];
 
 $lines = explode("\n", $profile);
 
-// if there are empty values in the lines array remove them
-$lines = array_filter($lines);
-
 $headings = [
-    '', // this is for the profile heading.
     't4_url',
     't4_webapi',
     't4_token'
 ];
 
-function isProfileHeading($value)
+function isConfigurationLine($value)
 {
+    // If it's just an empty line return false, we don't need it.
+    if ($value == "") return false;
+
+    // if it matches the profile heading syntax return false, we don't need it.
     $regex = "/\[.*\]/";
-    return preg_match($regex, $value);
+    $matchesProfileHeadingSyntax = preg_match($regex, $value);
+    return $matchesProfileHeadingSyntax ? false : true;
 }
 
 function getValue($line, $key) {
-    // if it matches a profile name return false
-    if (isProfileHeading($line)) return false;
-
     $regex = "/^{$key}=\"(.*)\"$/";
     $value = preg_match($regex, $line, $urlMatches);
     $value = $urlMatches[1];
     return $value;
 }
 
-list($profileName, $base, $webapi, $token) = array_map('getValue', $lines, $headings);
+$lines = array_filter($lines, 'isConfigurationLine');
+
+list($base, $webapi, $token) = array_map('getValue', $lines, $headings);
 
 return [
 
