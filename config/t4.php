@@ -20,25 +20,33 @@ $profile = $profile[0];
 
 $lines = explode("\n", $profile);
 
+// if there are empty values in the lines array remove them
+$lines = array_filter($lines);
+
 $headings = [
+    '', // this is for the profile heading.
     't4_url',
     't4_webapi',
     't4_token'
 ];
 
-function getValue($lines, $key) {
-    $value = preg_grep("/($key)/", $lines);
-    $value = array_values($value);
-    
-    $value = preg_match("/$key=\"(.*)\"/", $value[0], $urlMatches);
-    $value = $urlMatches[1];
+function isProfileHeading($value)
+{
+    $regex = "/\[.*\]/";
+    return preg_match($regex, $value);
+}
 
+function getValue($line, $key) {
+    // if it matches a profile name return false
+    if (isProfileHeading($line)) return false;
+
+    $regex = "/^{$key}=\"(.*)\"$/";
+    $value = preg_match($regex, $line, $urlMatches);
+    $value = $urlMatches[1];
     return $value;
 }
 
-$base = getValue($lines, 't4_url');
-$webapi = getValue($lines, 't4_webapi');
-$token = getValue($lines, 't4_token');
+list($profileName, $base, $webapi, $token) = array_map('getValue', $lines, $headings);
 
 return [
 
