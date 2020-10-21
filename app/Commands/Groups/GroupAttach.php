@@ -30,12 +30,11 @@ class GroupAttach extends Command
      */
     public function handle()
     {
-        $groupDetail = $this->argument('group');
+        $group = $this->argument('group');
         $userDetail = $this->argument('users');
 
         // Get the group info
-        $group = $this->getDetails('group', $groupDetail);
-        $group = $group->first();
+        $group = $this->getDetails('group', $group)->first();
         $url = __('api.group.show', ['group' => $group['id']]);
         $groupMetaDataDTO = $this->sendRequest($url);
 

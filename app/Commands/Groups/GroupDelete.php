@@ -32,8 +32,7 @@ class GroupDelete extends Command
     {
         $group = $this->argument('group');
 
-        $group = $this->getDetails('group', $group);
-        $group = $group->first();
+        $group = $this->getDetails('group', $group)->first();
 
         $url = __('api.group.show', ['group' => $group['id']]);
         

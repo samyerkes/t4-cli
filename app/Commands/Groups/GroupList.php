@@ -39,10 +39,10 @@ class GroupList extends Command
         $user = $this->argument('user');
 
         if ($user) {
-            $userId = $this->findUserID($user);
+            $user = $this->getDetails('user', $user)->first();
         }
 
-        $url = $user ? __('api.group.user', ['user' => $userId]) : __('api.group.index');
+        $url = $user ? __('api.group.user', ['user' => $user['id']]) : __('api.group.index');
         
         $data = $this->sendRequest($url);
 

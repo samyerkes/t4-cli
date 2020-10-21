@@ -15,7 +15,7 @@ class GroupMembers extends Command
      *
      * @var string
      */
-    protected $signature = 'group:members {name}
+    protected $signature = 'group:members {group}
                             {--fields=id,username : Instead of returning the whole group, returns the value of a specified field.}
                             {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
                             {--format=table}
@@ -36,11 +36,11 @@ class GroupMembers extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $group = $this->argument('group');
         
-        $groupId = $this->findGroupID($name);
+        $group = $this->getDetails('group', $group)->first();
 
-        $url = __('api.group.show', ['group' => $groupId]);
+        $url = __('api.group.show', ['group' => $group['id']]);
 
         $data = $this->sendRequest($url);
 
