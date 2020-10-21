@@ -15,7 +15,7 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $signature = 'user:get {userDetails*}
+    protected $signature = 'user:get {users*}
                             {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
                             {--format=table}
                             {--sort=id}
@@ -35,7 +35,7 @@ class UserGet extends Command
      */
     public function handle()
     {
-        $userDetail = $this->argument('userDetails');
+        $users = $this->argument('users');
         
         $url = __('api.user.index');
 
@@ -45,10 +45,10 @@ class UserGet extends Command
 
         $format = $this->option('format');
 
-        $data = $data->filter( function($d) use ($userDetail) {
+        $data = $data->filter( function($d) use ($users) {
             $attr = ['id', 'username'];
             foreach($attr as $a) {
-                if (in_array($d[$a], $userDetail)) return true;
+                if (in_array($d[$a], $users)) return true;
             }
             return false;
         });

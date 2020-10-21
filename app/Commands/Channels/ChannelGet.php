@@ -35,15 +35,11 @@ class ChannelGet extends Command
     {
         $channel = $this->argument('channel');
         
-        $url = __('api.channel.index');
-        
-        $data = $this->sendRequest($url);
+        $data = $this->getDetails('channel', $channel)->first();
 
         $fields = $this->fields($this->option('fields'));
 
         $format = $this->option('format');
-
-        $data = $data->firstWhere('name', $channel);
 
         $data = $this->getFieldsOfContent($data, $fields);
 

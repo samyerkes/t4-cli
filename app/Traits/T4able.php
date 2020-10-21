@@ -49,6 +49,10 @@ Trait T4able
         $detail = is_array($detail) ? $detail : [$detail];
 
         switch($model) {
+            case ('channel'):
+                $url = __('api.channel.index');
+                $attr = ['id', 'name'];
+                break;
             case ('group'):
                 $url = __('api.group.index');
                 $attr = ['id', 'name'];
