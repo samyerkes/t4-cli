@@ -66,7 +66,7 @@ Trait T4able
         $data = $this->sendRequest($url);   
         $data = $data->filter(function($d) use ($attr, $detail) {
             foreach($attr as $a) {
-                if (!in_array($d[$a], $detail)) return true;
+                if (in_array($d[$a], $detail)) return true;
             }
         });
 
