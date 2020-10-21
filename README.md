@@ -21,7 +21,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 key:list          | List API keys                                  |                                      | --fields --filter --format --order --sort | Table          |
 | t4 schedule:list     | Lists schedules                                |                                      | --fields --filter --format --order --sort | Table          |
 | t4 transfer:list     | Lists transfers                                |                                      | --fields --filter --format --order --sort | Table          |
-| t4 user:get          | Gets details about a user                      | {users*}                             | --fields --format --order --sort          | Table          |
+| t4 user:get          | Gets details about a user                      | {users?*}                            | --fields --format --order --sort          | Table          |
 | t4 user:list         | List users                                     |                                      | --fields --filter --format --order --sort | Table          |
 | t4 whoami            | Displays information about the auth'd user     |                                      | --fields --format                         | Table          |
 

@@ -2,6 +2,7 @@
 
 namespace App\Commands\Users;
 
+use Exception;
 use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\Customizable;
 use App\Traits\T4able;
@@ -15,7 +16,7 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $signature = 'user:get {users*}
+    protected $signature = 'user:get {users?*}
                             {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
                             {--format=table}
                             {--sort=id}
@@ -35,37 +36,26 @@ class UserGet extends Command
      */
     public function handle()
     {
+        // Arguments and options
         $users = $this->argument('users');
-        
-        $url = __('api.user.index');
-
-        $data = $this->sendRequest($url);
-
+        $sortField = $this->option('sort');
+        $sortOrder = $this->option('order');
+        $format = $this->option('format');
         $fields = $this->fields($this->option('fields'));
 
-        $format = $this->option('format');
-
-        $data = $data->filter( function($d) use ($users) {
-            $attr = ['id', 'username'];
-            foreach($attr as $a) {
-                if (in_array($d[$a], $users)) return true;
-            }
-            return false;
-        });
+        // Get the details of users passed into the command
+        $data = $this->getDetails('user', $users);
         
-        $data = $data->toArray();
-
-        $data = array_values($data);
-
-        $data = $this->getFieldsOfContent($data, $fields);
-
-        $sortField = $this->option('sort');
-
-        $sortOrder = $this->option('order');
-
-        $data = $this->sortContent($data, $sortField, $sortOrder);
-
-        $this->printWithFormatter($data, $format);
+        if (count($data)) {
+        
+            $data = $data->toArray();
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
 
     }
 

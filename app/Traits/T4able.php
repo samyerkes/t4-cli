@@ -64,13 +64,18 @@ Trait T4able
                 break;
         }
         
-        $data = $this->sendRequest($url);   
+        $data = $this->sendRequest($url);  
+        
+        // If we have passed in a detail then we want to filter the data.
+        if (!empty($detail)) {
 
-        $data = $data->filter(function($d) use ($attr, $detail) {
-            foreach($attr as $a) {
-                if (in_array($d[$a], $detail)) return true;
-            }
-        });
+            $data = $data->filter(function($d) use ($attr, $detail) {
+                foreach($attr as $a) {
+                    if (in_array($d[$a], $detail)) return true;
+                }
+            });
+
+        }
 
         return $data->values();
     }
