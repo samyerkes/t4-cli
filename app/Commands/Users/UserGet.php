@@ -17,7 +17,8 @@ class UserGet extends Command
      * @var string
      */
     protected $signature = 'user:get {users?*}
-                            {--fields=id,username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
+                            {--fields=id,username,emailAddress,firstName,lastName,authLevel : Instead of returning the whole user, returns the value of a specified field. (optional)}
+                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--sort=id}
                             {--order=desc}';
@@ -42,13 +43,14 @@ class UserGet extends Command
         $sortOrder = $this->option('order');
         $format = $this->option('format');
         $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
 
         // Get the details of users passed into the command
         $data = $this->getDetails('user', $users);
         
         if (count($data)) {
         
-            $data = $data->toArray();
+            $data = $this->getFilteredContent($data, $filter);
             
             $data = $this->getFieldsOfContent($data, $fields);
     

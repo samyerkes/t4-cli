@@ -22,7 +22,7 @@ Trait Customizable
             list($attr, $val) = $filter;
             return $d[$attr] == $val;
         });
-        return $data->toArray();
+        return $data->values()->toArray();
     }
 
     public function getFieldsOfContent($data, $fields) : array
