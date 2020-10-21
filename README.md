@@ -13,6 +13,7 @@ Command architecture inspired by the [WP-CLI](https://wp-cli.org/) and [AWS-CLI]
 | t4 group:attach      | Attaches a list of users to a group            | {group} {users*}                     |                                           | None           |
 | t4 group:create      | Creates a group                                | {groupname} {description?}           |                                           | None           |
 | t4 group:delete      | Deletes a group                                | {group}                              |                                           | None           |
+| t4 group:detach      | Detaches a list of users from a group          | {group} {users*}                     |                                           | None           |
 | t4 group:list        | Lists groups                                   | {user?}                              | --fields --filter --format --order --sort | Table          |
 | t4 group:members     | Returns the members of a group                 | {groupname}                          | --fields --filter --format --order --sort | Table          |
 | t4 key:list          | List API keys                                  |                                      | --fields --filter --format --order --sort | Table          |
