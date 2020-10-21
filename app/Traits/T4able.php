@@ -42,5 +42,32 @@ Trait T4able
         $data = array_values($data->toArray());
         return $data[0]['id'];
     }
+    
+    // Return a collection of attributes based on the model type and and needle type detail you provide.
+    public function getDetails($model, $detail)
+    {
+        $detail = is_array($detail) ? $detail : [$detail];
+
+        switch($model) {
+            case ('group'):
+                $url = __('api.group.index');
+                $attr = ['id', 'name'];
+                break;
+            default:
+                $url = __('api.user.index');
+                $attr = ['id', 'username'];
+                break;
+        }
+        
+        $data = $this->sendRequest($url);   
+        $data = $data->filter(function($d) use ($attr, $detail) {
+            foreach($attr as $a) {
+                if (in_array($d[$a], $detail)) return true;
+            }
+            return false;
+        });
+
+        return $data;
+    }
 
 }

@@ -14,7 +14,7 @@ class GroupDelete extends Command
      *
      * @var string
      */
-    protected $signature = 'group:delete {name}';
+    protected $signature = 'group:delete {group}';
 
     /**
      * The description of the command.
@@ -30,15 +30,16 @@ class GroupDelete extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $group = $this->argument('group');
 
-        $groupId = $this->findGroupID($name);
+        $group = $this->getDetails('group', $group);
+        $group = $group->first();
 
-        $url = __('api.group.show', ['group' => $groupId]);
+        $url = __('api.group.show', ['group' => $group['id']]);
         
         $data = $this->sendRequest($url, 'delete');
 
-        $this->info("Success: Deleted group {$name}");
+        $this->info("Success: Deleted group {$group['name']}");
 
     }
 
