@@ -6,7 +6,7 @@ use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\Customizable;
 use App\Traits\T4able;
 
-class TransferList extends Command
+class TransferGet extends Command
 {
     use Customizable, T4able;
     
@@ -15,7 +15,7 @@ class TransferList extends Command
      *
      * @var string
      */
-    protected $signature = 'transfer:list
+    protected $signature = 'transfer:get {transfers?*}
                             {--fields=id,name,remoteHost,remoteRoot,channelID : Instead of returning the whole transfer, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all transfers, returns the transfers who only match a specific filter. (optional)}
                             {--format=table}
@@ -27,7 +27,7 @@ class TransferList extends Command
      *
      * @var string
      */
-    protected $description = 'List transfers';
+    protected $description = 'Get a list of transfers';
 
     /**
      * Execute the console command.
@@ -36,26 +36,27 @@ class TransferList extends Command
      */
     public function handle()
     {
-        $url = __('api.transfer.index');
-        $data = $this->sendRequest($url);
-
-        $fields = $this->fields($this->option('fields'));
-
-        $filter = $this->filter($this->option('filter'));
-        
-        $format = $this->option('format');
-
-        $data = $this->getFilteredContent($data, $filter);
-        
-        $data = $this->getFieldsOfContent($data, $fields);
-        
+        // Arguments and options
+        $transfers = $this->argument('transfers');
         $sortField = $this->option('sort');
-
         $sortOrder = $this->option('order');
+        $format = $this->option('format');
+        $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
 
-        $data = $this->sortContent($data, $sortField, $sortOrder);
+        // Get the details of keys passed into the command
+        $data = $this->getDetails('transfer', $transfers);
 
-        $this->printWithFormatter($data, $format);
+        if (count($data)) {
+        
+            $data = $this->getFilteredContent($data, $filter);
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
 
     }
 

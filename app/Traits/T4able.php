@@ -68,6 +68,9 @@ Trait T4able
             case ('schedule'):
                 $url = __('api.schedule.index');
                 break;
+            case ('transfer'):
+                $url = __('api.transfer.index');
+                break;
             default:
                 $url = __('api.user.index');
                 $attr = ['id', 'username'];
