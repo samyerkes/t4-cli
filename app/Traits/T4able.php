@@ -65,6 +65,9 @@ Trait T4able
             case ('group'):
                 $url = __('api.group.index');
                 break;
+            case ('schedule'):
+                $url = __('api.schedule.index');
+                break;
             default:
                 $url = __('api.user.index');
                 $attr = ['id', 'username'];

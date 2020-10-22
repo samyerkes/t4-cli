@@ -17,7 +17,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 group:list        | Lists groups                                   | {user?}                    | --fields --filter --format --order --sort                | Table          |
 | t4 group:members     | Returns the members of a group                 | {groupname}                | --fields --filter --format --order --sort                | Table          |
 | t4 key:get           | Get a list of API keys                         | {keys?*}                   | --fields --filter --format --order --sort                | Table          |
-| t4 schedule:list     | Lists schedules                                |                            | --fields --filter --format --order --sort                | Table          |
+| t4 schedule:get      | Get a list of scheduled jobs                   | {schedules?*}              | --fields --filter --format --order --sort                | Table          |
 | t4 transfer:list     | Lists transfers                                |                            | --fields --filter --format --order --sort                | Table          |
 | t4 user:get          | Gets details about a user                      | {users?*}                  | --fields --filter --format --order --sort                | Table          |
 | t4 whoami            | Displays information about the auth'd user     |                            | --fields --format                                        | Table          |
