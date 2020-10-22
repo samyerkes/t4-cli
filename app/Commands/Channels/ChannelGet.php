@@ -15,9 +15,12 @@ class ChannelGet extends Command
      *
      * @var string
      */
-    protected $signature = 'channel:get {channel}
+    protected $signature = 'channel:get {channel?*}
                             {--fields=id,name : Instead of returning the whole channel, returns the value of a specified field.}
-                            {--format=table}';
+                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
+                            {--format=table}
+                            {--sort=id}
+                            {--order=desc}';
 
     /**
      * The description of the command.
@@ -33,17 +36,26 @@ class ChannelGet extends Command
      */
     public function handle()
     {
+        // Arguments and options
         $channel = $this->argument('channel');
-        
-        $data = $this->getDetails('channel', $channel)->first();
-
-        $fields = $this->fields($this->option('fields'));
-
+        $sortField = $this->option('sort');
+        $sortOrder = $this->option('order');
         $format = $this->option('format');
+        $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
+        
+        $data = $this->getDetails('channel', $channel);
 
-        $data = $this->getFieldsOfContent($data, $fields);
+        if (count($data)) {
+            $data = $this->getFilteredContent($data, $filter);
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
 
-        $this->printWithFormatter($data, $format);
 
     }
 
