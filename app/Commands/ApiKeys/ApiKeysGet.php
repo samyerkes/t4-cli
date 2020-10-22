@@ -6,7 +6,7 @@ use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\Customizable;
 use App\Traits\T4able;
 
-class ApiKeysList extends Command
+class ApiKeysGet extends Command
 {
     use Customizable, T4able;
     
@@ -15,7 +15,7 @@ class ApiKeysList extends Command
      *
      * @var string
      */
-    protected $signature = 'key:list
+    protected $signature = 'key:get {keys?*}
                             {--fields=id,name,active,userId,invalidationDate : Instead of returning the whole api key, returns the value of a specified field.}
                             {--filter= : Instead of returning all api keys, returns the api keys who only match a specific filter.}
                             {--format=table}
@@ -27,7 +27,7 @@ class ApiKeysList extends Command
      *
      * @var string
      */
-    protected $description = 'List API keys';
+    protected $description = 'Get a list of API keys';
 
     /**
      * Execute the console command.
@@ -36,6 +36,7 @@ class ApiKeysList extends Command
      */
     public function handle()
     {
+        // Assign fields that are actually timestamps
         $timestampFields = [
             'lastModifiedBy',
             'dateModified',
@@ -43,31 +44,29 @@ class ApiKeysList extends Command
             'invalidationDate'
         ];
 
-        $url = __('api.keys.index');
-        
-        $data = $this->sendRequest($url);
-
-        $fields = $this->fields($this->option('fields'));
-
-        $filter = $this->filter($this->option('filter'));
-        
-        $format = $this->option('format');
-
-        $data = $this->getFilteredContent($data, $filter);
-
-        $data = array_values($data);
-        
-        $data = $this->getFieldsOfContent($data, $fields);
-        
-        $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
-
+        // Arguments and options
+        $keys = $this->argument('keys');
         $sortField = $this->option('sort');
-
         $sortOrder = $this->option('order');
+        $format = $this->option('format');
+        $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
 
-        $data = $this->sortContent($data, $sortField, $sortOrder);
+        // Get the details of keys passed into the command
+        $data = $this->getDetails('apikey', $keys);
 
-        $this->printWithFormatter($data, $format);
+        if (count($data)) {
+        
+            $data = $this->getFilteredContent($data, $filter);
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
+
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
         
     }
 
