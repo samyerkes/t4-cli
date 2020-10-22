@@ -9,8 +9,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 about             | Get details about the application, host and os |                            | --fields --format                                        | Table          |
 | t4 channel:get       | Gets details about a channel                   | {channel?*}                | --fields --filter --format -m|--microsite --order --sort | Table          |
 | t4 configure         | Configures the CLI                             |                            |                                                          | None           |
-| t4 contenttypes:get  | Gets details about a content type              | {contentTypeDetails*}      | --fields --format --order --sort                         | Table          |
-| t4 contenttypes:list | List content types                             |                            | --fields --filter --format --order --sort                | Table          |
+| t4 contenttypes:get  | Gets details about a content type              | {contenttype?*}            | --fields --filter --format --order --sort                | Table          |
 | t4 group:attach      | Attaches a list of users to a group            | {group} {users*}           |                                                          | None           |
 | t4 group:create      | Creates a group                                | {groupname} {description?} |                                                          | None           |
 | t4 group:delete      | Deletes a group                                | {group}                    |                                                          | None           |

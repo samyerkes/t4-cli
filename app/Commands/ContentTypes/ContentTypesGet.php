@@ -15,8 +15,9 @@ class ContentTypesGet extends Command
      *
      * @var string
      */
-    protected $signature = 'contenttype:get {contentTypeDetails*}
+    protected $signature = 'contenttype:get {contenttype?*}
                             {--fields=id,alias,description : Return specific fields.}
+                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--sort=id}
                             {--order=desc}';
@@ -36,38 +37,30 @@ class ContentTypesGet extends Command
     public function handle()
     {
         /**
-         * Note: the content type name is the original name added to the system. This command will use the alias attribute since that's the up to date attribute that people would normally use to look up a content type.
+         * Note: The content type name is the original name added to the system. This command will use the alias attribute since that's the up to date attribute that people would normally use to look up a content type.
          */
-        $contentTypeDetails = $this->argument('contentTypeDetails');
-        
-        $url = __('api.contenttype.index');
-        $data = $this->sendRequest($url);
 
-        $fields = $this->fields($this->option('fields'));
-
-        $format = $this->option('format');
-
-        $data = $data->filter( function($d) use ($contentTypeDetails) {
-            $attr = ['id', 'alias'];
-            foreach($attr as $a) {
-                if (in_array($d[$a], $contentTypeDetails)) return true;
-            }
-            return false;
-        });
-        
-        $data = $data->toArray();
-
-        $data = array_values($data);
-
-        $data = $this->getFieldsOfContent($data, $fields);
-
+        // Arguments and options
+        $contenttypes = $this->argument('contenttype');
         $sortField = $this->option('sort');
-
         $sortOrder = $this->option('order');
+        $format = $this->option('format');
+        $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
 
-        $data = $this->sortContent($data, $sortField, $sortOrder);
+        // Get the details of users passed into the command
+        $data = $this->getDetails('contenttype', $contenttypes);
 
-        $this->printWithFormatter($data, $format);
+        if (count($data)) {
+        
+            $data = $this->getFilteredContent($data, $filter);
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
 
     }
 

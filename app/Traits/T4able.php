@@ -54,6 +54,10 @@ Trait T4able
                 $url = __('api.channel.index');
                 $attr = ['id', 'name'];
                 break;
+            case ('contenttype'):
+                $url = __('api.contenttype.index');
+                $attr = ['id', 'alias'];
+                break;
             case ('group'):
                 $url = __('api.group.index');
                 $attr = ['id', 'name'];
