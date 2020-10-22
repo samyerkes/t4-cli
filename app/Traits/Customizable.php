@@ -34,7 +34,7 @@ Trait Customizable
         foreach ($data as $d) {
             $element = [];
             foreach ($fields as $field) {
-                $element[$field] = $d[$field];
+                $element[$field] = $d[$field] ?? "";
             }
             array_push($fieldsArray, $element);
         }

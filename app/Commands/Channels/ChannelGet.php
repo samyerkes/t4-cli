@@ -15,7 +15,7 @@ class ChannelGet extends Command
      *
      * @var string
      */
-    protected $signature = 'channel:get {channel?*}
+    protected $signature = 'channel:get {channels?*}
                             {--fields=id,name,rootSectionID : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
@@ -38,7 +38,7 @@ class ChannelGet extends Command
     public function handle()
     {
         // Arguments and options
-        $channel = $this->argument('channel');
+        $channels = $this->argument('channels');
         $micrositeOption = $this->option('microsite');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
@@ -46,7 +46,7 @@ class ChannelGet extends Command
         $fields = $this->fields($this->option('fields'));
         $filter = $this->filter($this->option('filter'));
         
-        $data = $this->getDetails('channel', $channel);
+        $data = $this->getDetails('channel', $channels);
 
         if($micrositeOption) {
             $microsites = $data->map(function($d) {

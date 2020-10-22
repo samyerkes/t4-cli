@@ -15,7 +15,7 @@ class ContentTypesGet extends Command
      *
      * @var string
      */
-    protected $signature = 'contenttype:get {contenttype?*}
+    protected $signature = 'contenttype:get {contenttypes?*}
                             {--fields=id,alias,description : Return specific fields.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
@@ -41,7 +41,7 @@ class ContentTypesGet extends Command
          */
 
         // Arguments and options
-        $contenttypes = $this->argument('contenttype');
+        $contenttypes = $this->argument('contenttypes');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
         $format = $this->option('format');
