@@ -74,7 +74,7 @@ Trait Customizable
         $this->line($count);
     }
     
-    public function printAsSingle($data)
+    public function printAsText($data)
     {
         // Get the key we are going to print out
         $key = array_keys($data[0])[0];
@@ -102,8 +102,8 @@ Trait Customizable
             case "json":
                 $this->printAsJson($data);
                 break;
-            case "single":
-                $this->printAsSingle($data);
+            case "text":
+                $this->printAsText($data);
                 break;
             default:
                 $this->table(array_keys($data[0]), $data);

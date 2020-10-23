@@ -30,8 +30,8 @@ Using the --format flag, you have the ability to format output with the followin
 * csv - returns the results as a comma deliniated rows
 * id - returns only the ids of the results. If selected you must either not use the fields option (sticking with the defaults) or ensure to include the id as a field.
 * json - returns the results json encoded
-* single - returns the results for the first single attribute of each returned record. This is similar to the id format.
 * table - returns the results in an easy to read table.
+* text - returns the results for the first text attribute of each returned record. This is similar to the id format.
 
 ## Profile
 
@@ -61,5 +61,5 @@ t4 group:get "Group 1" "Group 2" --format=id | xargs t4 group:members
 
 Get all channels that have a transfer attached to them.
 ```
-t4 transfer:get --fields=channelID --format=single | xargs t4 channel:get -m
+t4 transfer:get --fields=channelID --format=text | xargs t4 channel:get -m
 ```
