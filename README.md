@@ -15,7 +15,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 group:delete      | Deletes a group                                | {group}                    |                                                          | None           |
 | t4 group:detach      | Detaches a list of users from a group          | {group} {users*}           |                                                          | None           |
 | t4 group:get         | Gets details about a group                     | {groups?*}                 | --fields --filter --format --order --sort                | Table          |
-| t4 group:members     | Returns the members of a group                 | {groupname}                | --fields --filter --format --order --sort                | Table          |
+| t4 group:members     | Returns the members of a group                 | {groups*}                  | --fields --filter --format --order --sort                | Table          |
 | t4 key:get           | Get a list of API keys                         | {keys?*}                   | --fields --filter --format --order --sort                | Table          |
 | t4 schedule:get      | Get a list of scheduled jobs                   | {schedules?*}              | --fields --filter --format --order --sort                | Table          |
 | t4 transfer:get      | Get a list of transfers                        | {transfers?*}              | --fields --filter --format --order --sort                | Table          |
@@ -48,3 +48,12 @@ t4_token="xxxxxxxxx"
 To switch your profile just export a new `T4_PROFILE` variable.
 
 ```export T4_PROFILE=profileName```
+
+## Command chaining
+
+The commands have been architected so you can do some interesting chaining using the --format=id option. Here are some interesting ideas to get you started.
+
+Get all group members from a list of groups.
+```
+t4 group:get "Group 1" "Group 2" --format=id | xargs t4 group:members
+```

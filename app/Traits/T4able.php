@@ -65,6 +65,10 @@ Trait T4able
             case ('group'):
                 $url = __('api.group.index');
                 break;
+            case ('groupmember'):
+                $url = __('api.group.show', ['group' => $detail['id']]);
+                $attr = ['id', 'username'];
+                break;
             case ('schedule'):
                 $url = __('api.schedule.index');
                 break;
@@ -78,6 +82,9 @@ Trait T4able
         }
         
         $data = $this->sendRequest($url);  
+
+        // Get nested data for groupmembers, this is kinda lame I have to do this for this specific model.
+        if ($model == 'groupmember') $data = collect($data['members']);
         
         // If we have passed in a detail then we want to filter the data.
         if (!empty($detail)) {
