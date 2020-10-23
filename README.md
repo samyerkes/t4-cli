@@ -58,3 +58,8 @@ Get all group members from a list of groups.
 ```
 t4 group:get "Group 1" "Group 2" --format=id | xargs t4 group:members
 ```
+
+Get all channels that have a transfer attached to them.
+```
+t4 transfer:get --fields=channelID --format=single | xargs t4 channel:get -m
+```

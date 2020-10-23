@@ -58,6 +58,9 @@ Trait T4able
             case ('channel'):
                 $url = __('api.channel.index');
                 break;
+            case ('channelmicrosite'):
+                $url = __('api.channel.index');
+                break;
             case ('contenttype'):
                 $url = __('api.contenttype.index');
                 $attr = ['id', 'alias'];
@@ -82,6 +85,15 @@ Trait T4able
         }
         
         $data = $this->sendRequest($url);  
+
+        // Get microsites of channels, this is kinda lame / a hack and could be cleaned up.
+        if ($model == 'channelmicrosite') {
+            $microsites = $data->map(function($d) {
+                return $d['microSites'];
+            })->flatten(1);
+
+            $data = $data->merge($microsites);
+        }
 
         // Get nested data for groupmembers, this is kinda lame I have to do this for this specific model.
         if ($model == 'groupmember') $data = collect($data['members']);

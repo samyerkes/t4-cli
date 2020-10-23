@@ -45,16 +45,10 @@ class ChannelGet extends Command
         $format = $this->option('format');
         $fields = $this->fields($this->option('fields'));
         $filter = $this->filter($this->option('filter'));
+
+        $option = $micrositeOption ? 'channelmicrosite' : 'channel';
         
-        $data = $this->getDetails('channel', $channels);
-
-        if($micrositeOption) {
-            $microsites = $data->map(function($d) {
-                return $d['microSites'];
-            })->flatten(1);
-
-            $data = $data->merge($microsites);
-        }
+        $data = $this->getDetails($option, $channels);
 
         if (count($data)) {
             $data = $this->getFilteredContent($data, $filter);
