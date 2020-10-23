@@ -6,7 +6,7 @@ use LaravelZero\Framework\Commands\Command as Command;
 use App\Traits\Customizable;
 use App\Traits\T4able;
 
-class GroupList extends Command
+class GroupGet extends Command
 {
     use Customizable, T4able;
     
@@ -15,7 +15,7 @@ class GroupList extends Command
      *
      * @var string
      */
-    protected $signature = 'group:list {user?}
+    protected $signature = 'group:get {groups?*}
                             {--fields=id,name : Instead of returning the whole group, returns the value of a specified field.}
                             {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
                             {--format=table}
@@ -27,7 +27,7 @@ class GroupList extends Command
      *
      * @var string
      */
-    protected $description = 'List groups';
+    protected $description = 'Get details about a group';
 
     /**
      * Execute the console command.
@@ -36,33 +36,28 @@ class GroupList extends Command
      */
     public function handle()
     {
-        $user = $this->argument('user');
 
-        if ($user) {
-            $user = $this->getDetails('user', $user)->first();
-        }
-
-        $url = $user ? __('api.group.user', ['user' => $user['id']]) : __('api.group.index');
-        
-        $data = $this->sendRequest($url);
-
-        $fields = $this->fields($this->option('fields'));
-
-        $filter = $this->filter($this->option('filter'));
-        
-        $format = $this->option('format');
-
-        $data = $this->getFilteredContent($data, $filter);
-
-        $data = $this->getFieldsOfContent($data, $fields);
-
+        // Arguments and options
+        $groups = $this->argument('groups');
         $sortField = $this->option('sort');
-
         $sortOrder = $this->option('order');
+        $format = $this->option('format');
+        $fields = $this->fields($this->option('fields'));
+        $filter = $this->filter($this->option('filter'));
 
-        $data = $this->sortContent($data, $sortField, $sortOrder);
-
-        $this->printWithFormatter($data, $format);
+        // Get the details of users passed into the command
+        $data = $this->getDetails('group', $groups);
+        
+        if (count($data)) {
+        
+            $data = $this->getFilteredContent($data, $filter);
+            
+            $data = $this->getFieldsOfContent($data, $fields);
+    
+            $data = $this->sortContent($data, $sortField, $sortOrder);
+    
+            $this->printWithFormatter($data, $format);
+        }
 
     }
 

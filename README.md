@@ -14,7 +14,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 group:create      | Creates a group                                | {groupname} {description?} |                                                          | None           |
 | t4 group:delete      | Deletes a group                                | {group}                    |                                                          | None           |
 | t4 group:detach      | Detaches a list of users from a group          | {group} {users*}           |                                                          | None           |
-| t4 group:list        | Lists groups                                   | {user?}                    | --fields --filter --format --order --sort                | Table          |
+| t4 group:get         | Gets details about a group                     | {groups?*}                 | --fields --filter --format --order --sort                | Table          |
 | t4 group:members     | Returns the members of a group                 | {groupname}                | --fields --filter --format --order --sort                | Table          |
 | t4 key:get           | Get a list of API keys                         | {keys?*}                   | --fields --filter --format --order --sort                | Table          |
 | t4 schedule:get      | Get a list of scheduled jobs                   | {schedules?*}              | --fields --filter --format --order --sort                | Table          |
