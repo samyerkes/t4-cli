@@ -18,6 +18,9 @@ return [
     'keys' => [
         'index' => '/apikey/list'
     ],
+    'navigation' => [
+        'index' => '/navigation'
+    ],
     'profile' => '/profile',
     'schedule' => [
         'index' => '/schedule'
