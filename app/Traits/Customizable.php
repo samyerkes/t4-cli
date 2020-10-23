@@ -73,6 +73,19 @@ Trait Customizable
         $count = count($data);
         $this->line($count);
     }
+    
+    public function printAsSingle($data)
+    {
+        // Get the key we are going to print out
+        $key = array_keys($data[0])[0];
+
+        // Write out each attribute as it's own separate line
+        $data = collect($data);
+        $data = $data->pluck($key)
+                    ->each(function($d) {
+                        $this->line($d);
+                    });
+    }
 
     public function printWithFormatter($data, $format) 
     {
@@ -88,6 +101,9 @@ Trait Customizable
                 break;
             case "json":
                 $this->printAsJson($data);
+                break;
+            case "single":
+                $this->printAsSingle($data);
                 break;
             default:
                 $this->table(array_keys($data[0]), $data);

@@ -30,6 +30,7 @@ Using the --format flag, you have the ability to format output with the followin
 * csv - returns the results as a comma deliniated rows
 * id - returns only the ids of the results. If selected you must either not use the fields option (sticking with the defaults) or ensure to include the id as a field.
 * json - returns the results json encoded
+* single - returns the results for the first single attribute of each returned record. This is similar to the id format.
 * table - returns the results in an easy to read table.
 
 ## Profile
