@@ -12,7 +12,7 @@ class NavigationGet extends Command
      *
      * @var string
      */
-    protected $signature = 'navigation:get {navigations?*}
+    protected $signature = 'navigation:get {details?*}
                             {--fields=id,name,navigationTypeName : Instead of returning the whole navigation item, returns the value of a specified field.}
                             {--filter= : Instead of returning all navigation items, returns the api keys who only match a specific filter.}
                             {--format=table}
@@ -35,29 +35,23 @@ class NavigationGet extends Command
     public function handle()
     {
         // Arguments and options
-        $navs = $this->argument('navigations');
-        $labels = $this->option('labels');
-        $sortField = $this->option('sort');
-        $sortOrder = $this->option('order');
-        $format = $this->option('format');
-        $fields = $this->fields($this->option('fields'));
-        $filter = $this->filter($this->option('filter'));
+        $this->getOptions();
 
         // Get the details of keys passed into the command
-        $data = $this->getDetails('navigation', $navs);
+        $data = $this->getDetails('navigation', $this->details);
 
         if (count($data)) {
 
             // If the command has the label flag then just do an early return. 
-            if ($labels) return $this->printLabels($data);
+            if ($this->labels) return $this->printLabels($data);
         
-            $data = $this->getFilteredContent($data, $filter);
+            $data = $this->getFilteredContent($data, $this->filters);
             
-            $data = $this->getFieldsOfContent($data, $fields);
+            $data = $this->getFieldsOfContent($data, $this->fields);
     
-            $data = $this->sortContent($data, $sortField, $sortOrder);
+            $data = $this->sortContent($data, $this->sort, $this->order);
     
-            $this->printWithFormatter($data, $format);
+            $this->printWithFormatter($data, $this->format);
         }
         
     }

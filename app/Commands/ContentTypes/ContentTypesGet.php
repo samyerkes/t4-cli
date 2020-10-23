@@ -12,7 +12,7 @@ class ContentTypesGet extends Command
      *
      * @var string
      */
-    protected $signature = 'contenttype:get {contenttypes?*}
+    protected $signature = 'contenttype:get {details?*}
                             {--fields=id,alias,description : Return specific fields.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
@@ -39,29 +39,23 @@ class ContentTypesGet extends Command
          */
 
         // Arguments and options
-        $contenttypes = $this->argument('contenttypes');
-        $labels = $this->option('labels');
-        $sortField = $this->option('sort');
-        $sortOrder = $this->option('order');
-        $format = $this->option('format');
-        $fields = $this->fields($this->option('fields'));
-        $filter = $this->filter($this->option('filter'));
+        $this->getOptions();
 
         // Get the details of users passed into the command
-        $data = $this->getDetails('contenttype', $contenttypes);
+        $data = $this->getDetails('contenttype', $this->details);
 
         if (count($data)) {
 
             // If the command has the label flag then just do an early return. 
-            if ($labels) return $this->printLabels($data);
+            if ($this->labels) return $this->printLabels($data);
         
-            $data = $this->getFilteredContent($data, $filter);
+            $data = $this->getFilteredContent($data, $this->filters);
             
-            $data = $this->getFieldsOfContent($data, $fields);
+            $data = $this->getFieldsOfContent($data, $this->fields);
     
-            $data = $this->sortContent($data, $sortField, $sortOrder);
+            $data = $this->sortContent($data, $this->sort, $this->order);
     
-            $this->printWithFormatter($data, $format);
+            $this->printWithFormatter($data, $this->format);
         }
 
     }

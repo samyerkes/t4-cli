@@ -12,7 +12,7 @@ class GroupGet extends Command
      *
      * @var string
      */
-    protected $signature = 'group:get {groups?*}
+    protected $signature = 'group:get {details?*}
                             {--fields=id,name : Instead of returning the whole group, returns the value of a specified field.}
                             {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
                             {--format=table}
@@ -36,29 +36,23 @@ class GroupGet extends Command
     {
 
         // Arguments and options
-        $groups = $this->argument('groups');
-        $labels = $this->option('labels');
-        $sortField = $this->option('sort');
-        $sortOrder = $this->option('order');
-        $format = $this->option('format');
-        $fields = $this->fields($this->option('fields'));
-        $filter = $this->filter($this->option('filter'));
+        $this->getOptions();
 
         // Get the details of users passed into the command
-        $data = $this->getDetails('group', $groups);
+        $data = $this->getDetails('group', $this->details);
         
         if (count($data)) {
             
             // If the command has the label flag then just do an early return. 
-            if ($labels) return $this->printLabels($data);
+            if ($this->labels) return $this->printLabels($data);
 
-            $data = $this->getFilteredContent($data, $filter);
+            $data = $this->getFilteredContent($data, $this->filters);
             
-            $data = $this->getFieldsOfContent($data, $fields);
+            $data = $this->getFieldsOfContent($data, $this->fields);
     
-            $data = $this->sortContent($data, $sortField, $sortOrder);
+            $data = $this->sortContent($data, $this->sort, $this->order);
     
-            $this->printWithFormatter($data, $format);
+            $this->printWithFormatter($data, $this->format);
         }
 
     }

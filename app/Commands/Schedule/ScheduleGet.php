@@ -12,7 +12,7 @@ class ScheduleGet extends Command
      *
      * @var string
      */
-    protected $signature = 'schedule:get {schedules?*}
+    protected $signature = 'schedule:get {details?*}
                             {--fields=id,name,nextDue : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all schedules, returns the schedules who only match a specific filter. (optional)}
                             {--format=table}
@@ -41,31 +41,25 @@ class ScheduleGet extends Command
         ];
 
         // Arguments and options
-        $labels = $this->option('labels');
-        $schedules = $this->argument('schedules');
-        $sortField = $this->option('sort');
-        $sortOrder = $this->option('order');
-        $format = $this->option('format');
-        $fields = $this->fields($this->option('fields'));
-        $filter = $this->filter($this->option('filter'));
+        $this->getOptions();
 
         // Get the details of schedules passed into the command
-        $data = $this->getDetails('schedule', $schedules);
+        $data = $this->getDetails('schedule', $this->details);
 
         if (count($data)) {
 
             // If the command has the label flag then just do an early return. 
-            if ($labels) return $this->printLabels($data);
+            if ($this->labels) return $this->printLabels($data);
         
-            $data = $this->getFilteredContent($data, $filter);
+            $data = $this->getFilteredContent($data, $this->filters);
             
-            $data = $this->getFieldsOfContent($data, $fields);
+            $data = $this->getFieldsOfContent($data, $this->fields);
     
             $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
 
-            $data = $this->sortContent($data, $sortField, $sortOrder);
+            $data = $this->sortContent($data, $this->sort, $this->order);
     
-            $this->printWithFormatter($data, $format);
+            $this->printWithFormatter($data, $this->format);
         }
 
     }
