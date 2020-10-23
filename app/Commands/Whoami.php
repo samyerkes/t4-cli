@@ -2,13 +2,10 @@
 
 namespace App\Commands;
 
-use LaravelZero\Framework\Commands\Command as Command;
-use App\Traits\T4able;
-use App\Traits\Customizable;
+use App\Command;
 
 class Whoami extends Command
 {
-    use T4able, Customizable;
 
     /**
      * The signature of the command.

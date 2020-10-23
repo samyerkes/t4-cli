@@ -2,7 +2,7 @@
 
 namespace App\Commands;
 
-use LaravelZero\Framework\Commands\Command;
+use App\Command;
 use Storage;
 
 class Configure extends Command

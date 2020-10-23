@@ -2,14 +2,10 @@
 
 namespace App\Commands\Users;
 
-use Exception;
-use LaravelZero\Framework\Commands\Command as Command;
-use App\Traits\Customizable;
-use App\Traits\T4able;
+use App\Command;
 
 class UserGet extends Command
 {
-    use Customizable, T4able;
     
     /**
      * The signature of the command.

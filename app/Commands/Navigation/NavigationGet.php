@@ -2,13 +2,10 @@
 
 namespace App\Commands\Navigation;
 
-use LaravelZero\Framework\Commands\Command as Command;
-use App\Traits\Customizable;
-use App\Traits\T4able;
+use App\Command;
 
 class NavigationGet extends Command
 {
-    use Customizable, T4able;
     
     /**
      * The signature of the command.

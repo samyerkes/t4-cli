@@ -2,12 +2,10 @@
 
 namespace App\Commands\Groups;
 
-use LaravelZero\Framework\Commands\Command;
-use App\Traits\T4able;
+use App\Command;
 
 class GroupAttach extends Command
-{
-    use T4able;
+{ 
 
     /**
      * The signature of the command.
