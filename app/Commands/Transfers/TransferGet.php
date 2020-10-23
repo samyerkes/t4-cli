@@ -19,6 +19,7 @@ class TransferGet extends Command
                             {--fields=id,name,remoteHost,remoteRoot,channelID : Instead of returning the whole transfer, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all transfers, returns the transfers who only match a specific filter. (optional)}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -37,6 +38,7 @@ class TransferGet extends Command
     public function handle()
     {
         // Arguments and options
+        $labels = $this->option('labels');
         $transfers = $this->argument('transfers');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
@@ -48,6 +50,9 @@ class TransferGet extends Command
         $data = $this->getDetails('transfer', $transfers);
 
         if (count($data)) {
+
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
         
             $data = $this->getFilteredContent($data, $filter);
             

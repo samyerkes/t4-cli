@@ -140,5 +140,11 @@ Trait Customizable
         }
         return $data->toArray();
     }
+
+    public function printLabels($data)
+    {
+        $data = array_keys($data->first());
+        $this->line(implode(', ', $data));
+    }
     
 }

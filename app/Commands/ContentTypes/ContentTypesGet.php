@@ -19,6 +19,7 @@ class ContentTypesGet extends Command
                             {--fields=id,alias,description : Return specific fields.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -42,6 +43,7 @@ class ContentTypesGet extends Command
 
         // Arguments and options
         $contenttypes = $this->argument('contenttypes');
+        $labels = $this->option('labels');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
         $format = $this->option('format');
@@ -52,6 +54,9 @@ class ContentTypesGet extends Command
         $data = $this->getDetails('contenttype', $contenttypes);
 
         if (count($data)) {
+
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
         
             $data = $this->getFilteredContent($data, $filter);
             

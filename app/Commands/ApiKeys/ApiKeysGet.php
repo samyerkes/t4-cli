@@ -19,6 +19,7 @@ class ApiKeysGet extends Command
                             {--fields=id,name,active,userId,invalidationDate : Instead of returning the whole api key, returns the value of a specified field.}
                             {--filter= : Instead of returning all api keys, returns the api keys who only match a specific filter.}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -46,6 +47,7 @@ class ApiKeysGet extends Command
 
         // Arguments and options
         $keys = $this->argument('keys');
+        $labels = $this->option('labels');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
         $format = $this->option('format');
@@ -56,6 +58,9 @@ class ApiKeysGet extends Command
         $data = $this->getDetails('apikey', $keys);
 
         if (count($data)) {
+
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
         
             $data = $this->getFilteredContent($data, $filter);
             

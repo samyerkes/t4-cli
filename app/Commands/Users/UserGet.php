@@ -20,6 +20,7 @@ class UserGet extends Command
                             {--fields=id,username,emailAddress,firstName,lastName,authLevel : Instead of returning the whole user, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -42,13 +43,17 @@ class UserGet extends Command
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
         $format = $this->option('format');
+        $labels = $this->option('labels');
         $fields = $this->fields($this->option('fields'));
         $filter = $this->filter($this->option('filter'));
 
         // Get the details of users passed into the command
         $data = $this->getDetails('user', $users);
-        
+
         if (count($data)) {
+            
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
         
             $data = $this->getFilteredContent($data, $filter);
             

@@ -19,6 +19,7 @@ class GroupGet extends Command
                             {--fields=id,name : Instead of returning the whole group, returns the value of a specified field.}
                             {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -39,6 +40,7 @@ class GroupGet extends Command
 
         // Arguments and options
         $groups = $this->argument('groups');
+        $labels = $this->option('labels');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
         $format = $this->option('format');
@@ -49,7 +51,10 @@ class GroupGet extends Command
         $data = $this->getDetails('group', $groups);
         
         if (count($data)) {
-        
+            
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
+
             $data = $this->getFilteredContent($data, $filter);
             
             $data = $this->getFieldsOfContent($data, $fields);

@@ -63,3 +63,7 @@ Get all channels that have a transfer attached to them.
 ```
 t4 transfer:get --fields=channelID --format=text | xargs t4 channel:get -m
 ```
+
+## Labels
+
+Each `get` command comes default returned attributes, but there may be circumstances where you need to use other fields. To find out the available fields you can use, pass the `-l` or `--labels` option to print the fields available to that command.

@@ -19,6 +19,7 @@ class ScheduleGet extends Command
                             {--fields=id,name,nextDue : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all schedules, returns the schedules who only match a specific filter. (optional)}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--sort=id}
                             {--order=desc}';
 
@@ -43,6 +44,7 @@ class ScheduleGet extends Command
         ];
 
         // Arguments and options
+        $labels = $this->option('labels');
         $schedules = $this->argument('schedules');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
@@ -54,6 +56,9 @@ class ScheduleGet extends Command
         $data = $this->getDetails('schedule', $schedules);
 
         if (count($data)) {
+
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
         
             $data = $this->getFilteredContent($data, $filter);
             

@@ -33,7 +33,6 @@ class Whoami extends Command
      */
     public function handle()
     {
-        
         $url = __('api.profile');
         
         $data = $this->sendRequest($url);

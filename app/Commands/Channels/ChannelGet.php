@@ -19,6 +19,7 @@ class ChannelGet extends Command
                             {--fields=id,name,rootSectionID : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
+                            {--l|labels : Prints the available labels you can use in the fields option.}
                             {--m|microsite}
                             {--sort=id}
                             {--order=desc}';
@@ -39,6 +40,7 @@ class ChannelGet extends Command
     {
         // Arguments and options
         $channels = $this->argument('channels');
+        $labels = $this->option('labels');
         $micrositeOption = $this->option('microsite');
         $sortField = $this->option('sort');
         $sortOrder = $this->option('order');
@@ -51,6 +53,10 @@ class ChannelGet extends Command
         $data = $this->getDetails($option, $channels);
 
         if (count($data)) {
+            
+            // If the command has the label flag then just do an early return. 
+            if ($labels) return $this->printLabels($data);
+
             $data = $this->getFilteredContent($data, $filter);
             
             $data = $this->getFieldsOfContent($data, $fields);
