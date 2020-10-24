@@ -13,7 +13,6 @@ return [
     'group' => [
         'index' => '/group',
         'show' => '/group/:group',
-        'user' => '/group/user/:user',
     ],
     'keys' => [
         'index' => '/apikey/list'
@@ -29,6 +28,7 @@ return [
         'index' => '/transfer'
     ],
     'user' => [
-        'index' => '/user'
+        'index' => '/user',
+        'groups' => '/group/user/:user'
     ]
 ];

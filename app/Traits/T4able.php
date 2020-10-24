@@ -51,6 +51,7 @@ Trait T4able
 
         $attr = ['id', 'name'];
 
+        // This is basically a big router
         switch($model) {
             case ('apikey'):
                 $url = __('api.keys.index');
@@ -80,6 +81,9 @@ Trait T4able
                 break;
             case ('transfer'):
                 $url = __('api.transfer.index');
+                break;
+            case ('usergroup'):
+                $url = __('api.user.groups', ['user' => $detail['id']]);
                 break;
             default:
                 $url = __('api.user.index');
