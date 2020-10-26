@@ -29,6 +29,7 @@ return [
     ],
     'user' => [
         'index' => '/user',
+        'show' => '/user/:user',
         'groups' => '/group/user/:user'
     ]
 ];

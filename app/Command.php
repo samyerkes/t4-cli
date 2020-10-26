@@ -16,12 +16,17 @@ class Command extends LaravelCommand
     public function getOptions()
     {
         $this->details = $this->argument('details');
-        $this->sort = $this->option('sort');
-        $this->order = $this->option('order');
-        $this->format = $this->option('format');
-        $this->labels = $this->option('labels');
-        $this->fields = $this->fields($this->option('fields'));
-        $this->filters = $this->filter($this->option('filter'));
+        $this->sort = $this->getOption('sort');
+        $this->order = $this->getOption('order');
+        $this->format = $this->getOption('format');
+        $this->labels = $this->getOption('labels');
+        $this->fields = $this->fields($this->getOption('fields'));
+        $this->filters = $this->filter($this->getOption('filter'));
+    }
+
+    private function getOption($key)
+    {
+        return array_key_exists($key, $this->option()) ? $this->option($key) : "";
     }
     
 }
