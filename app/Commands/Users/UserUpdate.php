@@ -46,17 +46,18 @@ class UserUpdate extends Command
         $factory = new UserFactory();
         $users = $factory->generate($data);
 
+        $editableAttributes = [
+            "firstName",
+            "lastName",
+            "emailAddress",
+            "defaultLang",
+            "enabled",
+            "role",
+            "deleted"
+        ];
+        
         foreach ($users as $user) 
         {            
-            $editableAttributes = [
-                "firstName",
-                "lastName",
-                "emailAddress",
-                "defaultLang",
-                "enabled",
-                "role",
-                "deleted"
-            ];
             
             foreach($editableAttributes as $attr)
             {

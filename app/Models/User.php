@@ -21,6 +21,7 @@ class User extends Model
 
     protected $casts = [
         'enabled' => 'boolean',
+        'deleted' => 'boolean',
     ];
 
     protected $appends = ['role'];

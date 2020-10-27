@@ -143,7 +143,8 @@ Trait Customizable
 
     public function printLabels($data)
     {
-        $data = array_keys($data->first());
+        $first = $data[0];
+        $data = array_keys($first->getAttributes());
         $this->line(implode(', ', $data));
     }
     
