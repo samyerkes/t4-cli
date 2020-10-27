@@ -16,7 +16,10 @@ class User extends Model
         "enabled",
         "authLevel",
         "userLevel",
-        "deleted"
+        "deleted",
+        "role",
+        "password",
+        "authenticationMappingList"
     ];
 
     protected $casts = [
@@ -24,7 +27,9 @@ class User extends Model
         'deleted' => 'boolean',
     ];
 
-    protected $appends = ['role'];
+    protected $appends = [
+        'role'
+    ];
 
     public function getRoleAttribute() {
         $level = $this->userLevel ?? $this->authLevel;
