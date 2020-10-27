@@ -23,35 +23,28 @@ class User extends Model
         'enabled' => 'boolean',
     ];
 
+    protected $appends = ['role'];
+
     public function getRoleAttribute() {
-        $authNumber =  $this->authLevel;
-        switch ($authNumber) {
-            case 0:
-                $this->attributes['userLevel'] = 0;
-                return 'admin';
-            case 40:
-                $this->attributes['userLevel'] = 40;
-                return 'power';
-            case 1:
-                $this->attributes['userLevel'] = 1;
-                return 'moderator';
-            case 2:
-                $this->attributes['userLevel'] = 2;
-                return 'contributor';
-            case 50:
-                $this->attributes['userLevel'] = 50;
-                return 'visitor';
-        } 
+        $level = $this->userLevel ?? $this->authLevel;
+        return [
+            0 => "admin",
+            40 => "power",
+            1 => "moderator",
+            2 => "contributor",
+            50 => "visitor"
+        ][$level];
     }
 
     public function setRoleAttribute($value)
     {
-        // This is extremely hacky but it works for now.
-        if ($value == 'admin' || $value == 'administrator') $this->attributes['userLevel'] = 0;
-        if ($value == 'power' || $value == 'poweruser') $this->attributes['userLevel'] = 40;
-        if ($value == 'moderator' || $value == 'mod') $this->attributes['userLevel'] = 1;
-        if ($value == 'contributor' || $value == 'contrib') $this->attributes['userLevel'] = 2;
-        if ($value == 'visitor') $this->attributes['userLevel'] = 50;
+        $this->attributes['userLevel'] = [
+            "admin" => 0,
+            "power" => 40,
+            "moderator" => 1,
+            "contributor" => 2,
+            "visitor" => 50
+        ][$value];
     }
     
 }

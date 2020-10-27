@@ -3,7 +3,7 @@
 namespace App\Commands\Users;
 
 use App\Command;
-use App\Models\User;
+use App\Factories\UserFactory;
 
 class UserUpdate extends Command
 {
@@ -43,13 +43,11 @@ class UserUpdate extends Command
         // Get the details of users passed into the command
         $data = $this->getDetails('user', $this->details);
 
-        foreach ($data as $user) 
-        {
-            // Get the userDTO
-            $request = $this->sendRequest(__('api.user.show', ['user' => $user['id']]), 'get', $user);
-            $userDTO = User::make($request->toArray());
+        $factory = new UserFactory();
+        $users = $factory->generate($data);
 
-            
+        foreach ($users as $user) 
+        {            
             $editableAttributes = [
                 "firstName",
                 "lastName",
@@ -64,13 +62,13 @@ class UserUpdate extends Command
             {
                 if (!array_key_exists($attr, $this->option())) break; 
                 $currentValue = $user[$attr] ?? null;
-                $userDTO->$attr = $this->option($attr) ?? $currentValue;
+                $user->$attr = $this->option($attr) ?? $currentValue;
             }
             
             // Send the Update request
-            $request = $this->sendRequest(__('api.user.show', ['user' => $userDTO->id]), 'put', $userDTO->toArray());
+            $request = $this->sendRequest(__('api.user.show', ['user' => $user->id]), 'put', $user->toArray());
             
-            $this->info("User ". $userDTO->username ." successfully updated");
+            $this->info(__('actions.update', ['model' => 'User', 'user' => $user->username]));
         }
 
     }

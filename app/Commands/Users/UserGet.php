@@ -3,6 +3,7 @@
 namespace App\Commands\Users;
 
 use App\Command;
+use App\Factories\UserFactory;
 
 class UserGet extends Command
 {
@@ -13,7 +14,7 @@ class UserGet extends Command
      * @var string
      */
     protected $signature = 'user:get {details?*}
-                            {--fields=id,username,emailAddress,firstName,lastName,authLevel : Instead of returning the whole user, returns the value of a specified field. (optional)}
+                            {--fields=id,username,emailAddress,firstName,lastName,role : Instead of returning the whole user, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}
@@ -40,18 +41,21 @@ class UserGet extends Command
         // Get the details of users passed into the command
         $data = $this->getDetails('user', $this->details);
 
-        if (count($data)) {
+        $factory = new UserFactory();
+        $users = $factory->generate($data);
+
+        if ($users->count()) {
             
             // If the command has the label flag then just do an early return. 
-            if ($this->labels) return $this->printLabels($data);
+            if ($this->labels) return $this->printLabels($users);
         
-            $data = $this->getFilteredContent($data, $this->filters);
+            $users = $this->getFilteredContent($users, $this->filters);
             
-            $data = $this->getFieldsOfContent($data, $this->fields);
+            $users = $this->getFieldsOfContent($users, $this->fields);
     
-            $data = $this->sortContent($data, $this->sort, $this->order);
+            $users = $this->sortContent($users, $this->sort, $this->order);
     
-            $this->printWithFormatter($data, $this->format);
+            $this->printWithFormatter($users, $this->format);
         }
 
     }
