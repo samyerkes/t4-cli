@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'create' => ':model :user successfully created',
-    'update' => ':model :user successfully updated',
-    'delete' => ':model :user successfully deleted'
+    'create' => ':model :detail successfully created',
+    'update' => ':model :detail successfully updated',
+    'delete' => ':model :detail successfully deleted'
 ];

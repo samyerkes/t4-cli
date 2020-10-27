@@ -58,7 +58,7 @@ class UserCreate extends Command
 
         $users->each(function($user) {
             $request = $this->sendRequest(__('api.user.index'), 'post', $user->toArray());
-            $this->info(__('actions.create', ['model' => 'User', 'user' => $user->username]));
+            $this->info(__('actions.create', ['model' => 'User', 'detail' => $user->username]));
         });
 
     }

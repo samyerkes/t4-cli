@@ -12,7 +12,10 @@ class GroupCreate extends Command
      *
      * @var string
      */
-    protected $signature = 'group:create {name} {description?}';
+    protected $signature = 'group:create {name} {description?}
+                            {--defaultPreviewChannel=}
+                            {--emailAddress=}
+                            {--enabled=1}';
 
     /**
      * The description of the command.
@@ -30,11 +33,15 @@ class GroupCreate extends Command
     {
         $name = $this->argument('name');
         $description = $this->argument('description');
+        $emailAddress = $this->option('emailAddress');
+        $enabled = $this->option('enabled');
 
         $url = __('api.group.index');
         $data = $this->sendRequest($url, 'post', [
             'name' => $name,
-            'description' => $description
+            'description' => $description,
+            'defaultPreviewChannel' => $defaultPreviewChannel,
+            'emailAddress' => $emailAddress
         ]);
 
         $this->info("Success: Created group {$name}");

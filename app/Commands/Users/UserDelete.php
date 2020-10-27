@@ -42,7 +42,7 @@ class UserDelete extends Command
         {            
             $request = $this->sendRequest(__('api.user.show', ['user' => $user->id]), 'delete');
             
-            $this->info(__('actions.delete', ['model' => 'User', 'user' => $user->username]));
+            $this->info(__('actions.delete', ['model' => 'User', 'detail' => $user->username]));
         }
 
     }

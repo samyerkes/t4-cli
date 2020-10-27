@@ -20,8 +20,7 @@ class UserUpdate extends Command
                             {--defaultLang=}
                             {--enabled=}
                             {--role=}
-                            {--deleted=}
-                            {--l|labels : Prints the available labels you can use in the fields option.}';
+                            {--deleted=}';
 
     /**
      * The description of the command.
@@ -45,31 +44,16 @@ class UserUpdate extends Command
 
         $factory = new UserFactory();
         $users = $factory->generate($data);
-
-        $editableAttributes = [
-            "firstName",
-            "lastName",
-            "emailAddress",
-            "defaultLang",
-            "enabled",
-            "role",
-            "deleted"
-        ];
         
         foreach ($users as $user) 
         {            
-            
-            foreach($editableAttributes as $attr)
-            {
-                if (!array_key_exists($attr, $this->option())) break; 
-                $currentValue = $user[$attr] ?? null;
-                $user->$attr = $this->option($attr) ?? $currentValue;
-            }
+            $options = array_filter($this->option()); // gets rid of null values
+            $user->fill($options);
             
             // Send the Update request
             $request = $this->sendRequest(__('api.user.show', ['user' => $user->id]), 'put', $user->toArray());
             
-            $this->info(__('actions.update', ['model' => 'User', 'user' => $user->username]));
+            $this->info(__('actions.update', ['model' => 'User', 'detail' => $user->username]));
         }
 
     }
