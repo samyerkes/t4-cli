@@ -24,6 +24,7 @@
         "illuminate/translation": "^8.9",
         "laminas/laminas-text": "^2.7",
         "laravel-zero/framework": "^8.0",
+        "nunomaduro/laravel-console-summary": "^1.6",
         "padraic/phar-updater": "^1.0.6"
     },
     "require-dev": {

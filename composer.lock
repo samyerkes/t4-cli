@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "384051cc7b2f001710ca0e6300335489",
+    "content-hash": "297d745ca6922b72aa99c18810b88448",
     "packages": [
         {
             "name": "brick/math",
@@ -2323,16 +2323,16 @@
         },
         {
             "name": "nunomaduro/laravel-console-summary",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/laravel-console-summary.git",
-                "reference": "4766be89ac4c93268d1ad165f7f0281a8c02d450"
+                "reference": "fb17ca2487b87cbef621ce51ff46c373240c2a99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/laravel-console-summary/zipball/4766be89ac4c93268d1ad165f7f0281a8c02d450",
-                "reference": "4766be89ac4c93268d1ad165f7f0281a8c02d450",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-console-summary/zipball/fb17ca2487b87cbef621ce51ff46c373240c2a99",
+                "reference": "fb17ca2487b87cbef621ce51ff46c373240c2a99",
                 "shasum": ""
             },
             "require": {
@@ -2374,7 +2374,11 @@
                 "php",
                 "symfony"
             ],
-            "time": "2020-08-27T10:28:12+00:00"
+            "support": {
+                "issues": "https://github.com/nunomaduro/laravel-console-summary/issues",
+                "source": "https://github.com/nunomaduro/laravel-console-summary"
+            },
+            "time": "2020-10-28T09:20:07+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
