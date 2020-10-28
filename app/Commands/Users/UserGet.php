@@ -14,7 +14,7 @@ class UserGet extends Command
      * @var string
      */
     protected $signature = 'user:get {details?*}
-                            {--fields=id,username,emailAddress,firstName,lastName,role : Instead of returning the whole user, returns the value of a specified field. (optional)}
+                            {--fields=id,username,role : Instead of returning the whole user, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}
@@ -26,7 +26,7 @@ class UserGet extends Command
      *
      * @var string
      */
-    protected $description = 'Gets details about one or more specific users.';
+    protected $description = 'Get a list of users';
 
     /**
      * Execute the console command.
@@ -35,29 +35,14 @@ class UserGet extends Command
      */
     public function handle()
     {
-        // Arguments and options
         $this->getOptions();
 
-        // Get the details of users passed into the command
         $data = $this->getDetails('user', $this->details);
 
         $factory = new UserFactory();
         $users = $factory->generate($data);
 
-        if ($users->count()) {
-            
-            // If the command has the label flag then just do an early return. 
-            if ($this->labels) return $this->printLabels($users);
-        
-            $users = $this->getFilteredContent($users, $this->filters);
-            
-            $users = $this->getFieldsOfContent($users, $this->fields);
-    
-            $users = $this->sortContent($users, $this->sort, $this->order);
-    
-            $this->printWithFormatter($users, $this->format);
-        }
-
+        $this->print($users);
     }
 
 }

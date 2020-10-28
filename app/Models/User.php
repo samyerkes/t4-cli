@@ -15,7 +15,6 @@ class User extends Model
         "defaultLang",
         "enabled",
         "authLevel",
-        "userLevel",
         "deleted",
         "role",
         "password",
@@ -30,6 +29,32 @@ class User extends Model
     protected $appends = [
         'role'
     ];
+
+    protected $default = [
+        "id",
+        "name",
+        "role"
+    ];
+    
+    protected $optional = [
+        "firstName",
+        "lastName",
+        "emailAddress",
+        "defaultLang",
+        "enabled",
+        "authLevel",
+        "deleted"
+    ];
+
+    public function getDefaultFields()
+    {
+        return $this->default;
+    }
+    
+    public function getOptionalFields()
+    {
+        return $this->optional;
+    }
 
     public function getRoleAttribute() {
         $level = $this->userLevel ?? $this->authLevel;
