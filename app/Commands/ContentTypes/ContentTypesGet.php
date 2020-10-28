@@ -3,6 +3,7 @@
 namespace App\Commands\ContentTypes;
 
 use App\Command;
+use App\Factories\ContentTypeFactory;
 
 class ContentTypesGet extends Command
 {
@@ -25,7 +26,7 @@ class ContentTypesGet extends Command
      *
      * @var string
      */
-    protected $description = 'Gets details about one or more specific content types.';
+    protected $description = 'Get a list of content types';
 
     /**
      * Execute the console command.
@@ -34,29 +35,14 @@ class ContentTypesGet extends Command
      */
     public function handle()
     {
-        /**
-         * Note: The content type name is the original name added to the system. This command will use the alias attribute since that's the up to date attribute that people would normally use to look up a content type.
-         */
-
-        // Arguments and options
         $this->getOptions();
 
-        // Get the details of users passed into the command
         $data = $this->getDetails('contenttype', $this->details);
 
-        if (count($data)) {
+        $factory = new ContentTypeFactory();
+        $contenttypes = $factory->generate($data);
 
-            // If the command has the label flag then just do an early return. 
-            if ($this->labels) return $this->printLabels($data);
-        
-            $data = $this->getFilteredContent($data, $this->filters);
-            
-            $data = $this->getFieldsOfContent($data, $this->fields);
-    
-            $data = $this->sortContent($data, $this->sort, $this->order);
-    
-            $this->printWithFormatter($data, $this->format);
-        }
+        $this->print($contenttypes);
 
     }
 
