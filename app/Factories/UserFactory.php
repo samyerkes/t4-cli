@@ -15,7 +15,8 @@ class UserFactory {
         $users = collect([]);
         foreach ($data as $user) 
         {
-            $userDTO = User::make($user);
+            $userDTO = new User;
+            $userDTO = $userDTO->fill($user);
             $users->push($userDTO);
         }
         return $users;

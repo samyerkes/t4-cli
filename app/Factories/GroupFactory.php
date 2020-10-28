@@ -14,7 +14,8 @@ class GroupFactory {
         $groups = collect([]);
         foreach ($data as $group) 
         {
-            $groupDTO = Group::make($group);
+            $groupDTO = new Group;
+            $groupDTO = $groupDTO->fill($group);
             $groups->push($groupDTO);
         }
         return $groups;
