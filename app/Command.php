@@ -28,5 +28,21 @@ class Command extends LaravelCommand
     {
         return array_key_exists($key, $this->option()) ? $this->option($key) : "";
     }
+
+    public function print($data)
+    {
+        if (count($data)) {
+            // If the command has the label flag then just do an early return. 
+            if ($this->labels) return $this->printLabels($data);
+        
+            $data = $this->getFilteredContent($data, $this->filters);
+            
+            $data = $this->getFieldsOfContent($data, $this->fields);
+    
+            $data = $this->sortContent($data, $this->sort, $this->order);
+    
+            $this->printWithFormatter($data, $this->format);
+        }
+    }
     
 }

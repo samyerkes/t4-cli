@@ -143,9 +143,9 @@ Trait Customizable
 
     public function printLabels($data)
     {
-        $first = $data[0];
-        $data = array_keys($first->getAttributes());
-        $this->line(implode(', ', $data));
+        $first = $data->first();
+        $this->line('Default: ' . implode(', ', $first->getDefaultFields()));
+        $this->line('Optional: ' . implode(', ', $first->getOptionalFields()));
     }
     
 }

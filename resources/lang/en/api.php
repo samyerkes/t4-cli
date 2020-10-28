@@ -14,6 +14,9 @@ return [
         'index' => '/group',
         'show' => '/group/:group',
     ],
+    'layout' => [
+        'index' => '/pageLayout'
+    ],
     'keys' => [
         'index' => '/apikey/list'
     ],

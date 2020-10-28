@@ -73,6 +73,9 @@ Trait T4able
                 $url = __('api.group.show', ['group' => $detail['id']]);
                 $attr = ['id', 'username'];
                 break;
+            case ('layout'):
+                $url = __('api.layout.index');
+                break;
             case ('navigation'):
                 $url = __('api.navigation.index');
                 break;
