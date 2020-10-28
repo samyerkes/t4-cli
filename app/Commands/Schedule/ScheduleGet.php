@@ -14,7 +14,7 @@ class ScheduleGet extends Command
      * @var string
      */
     protected $signature = 'schedule:get {details?*}
-                            {--fields=id,name : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
+                            {--fields=id,name,nextDue : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all schedules, returns the schedules who only match a specific filter. (optional)}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

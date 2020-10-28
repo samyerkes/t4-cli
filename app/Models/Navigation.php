@@ -25,7 +25,8 @@ class Navigation extends Model
 
     protected $default = [
         "id",
-        "name"
+        "name",
+        "group",
     ];
     
     protected $optional = [
@@ -33,7 +34,6 @@ class Navigation extends Model
         "navigationType",
         "navigationTypeName",
         "editable",
-        "group",
         "sharedgroup",
         "sharedGroupCount"
     ];

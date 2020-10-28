@@ -22,12 +22,12 @@ class Transfer extends Model
 
     protected $default = [
         "id",
-        "name"
+        "name",
+        "remoteHost"
     ];
     
     protected $optional = [
         "description",
-        "remoteHost",
         "remoteRoot",
         "transferType",
         "channelID",

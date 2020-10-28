@@ -14,7 +14,7 @@ class TransferGet extends Command
      * @var string
      */
     protected $signature = 'transfer:get {details?*}
-                            {--fields=id,name : Instead of returning the whole transfer, returns the value of a specified field. (optional)}
+                            {--fields=id,name,remoteHost : Instead of returning the whole transfer, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all transfers, returns the transfers who only match a specific filter. (optional)}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

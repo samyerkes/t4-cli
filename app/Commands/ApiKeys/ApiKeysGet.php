@@ -14,7 +14,7 @@ class ApiKeysGet extends Command
      * @var string
      */
     protected $signature = 'key:get {details?*}
-                            {--fields=id,name : Instead of returning the whole api key, returns the value of a specified field.}
+                            {--fields=id,name,userId,invalidationDate : Instead of returning the whole api key, returns the value of a specified field.}
                             {--filter= : Instead of returning all api keys, returns the api keys who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

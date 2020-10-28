@@ -14,7 +14,7 @@ class GroupGet extends Command
      * @var string
      */
     protected $signature = 'group:get {details?*}
-                            {--fields=id,name : Instead of returning the whole group, returns the value of a specified field.}
+                            {--fields=id,name,membersCount : Instead of returning the whole group, returns the value of a specified field.}
                             {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

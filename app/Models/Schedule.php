@@ -29,13 +29,13 @@ class Schedule extends Model
     protected $default = [
         "id",
         "name",
+        "nextDue"
     ];
     
     protected $optional = [
         "jobClass",
         "status",
         "creationDate",
-        "nextDue",
         "fixedRate",
         "executionInterval",
         "executionCount",

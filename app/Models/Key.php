@@ -24,15 +24,15 @@ class Key extends Model
     protected $default = [
         "id",
         "name",
+        "userId",
+        "invalidationDate"
     ];
     
     protected $optional = [
         "active",
         "deleted",
-        "userId",
         "dateModified",
         "dateCreated",
-        "invalidationDate",
         "expired"
     ];
 

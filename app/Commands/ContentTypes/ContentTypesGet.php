@@ -14,7 +14,7 @@ class ContentTypesGet extends Command
      * @var string
      */
     protected $signature = 'contenttype:get {details?*}
-                            {--fields=id,alias : Return specific fields.}
+                            {--fields=id,alias,group : Return specific fields.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

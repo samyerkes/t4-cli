@@ -19,13 +19,13 @@ class Channel extends Model
     protected $default = [
         "id",
         "name",
+        "rootSectionID"
     ];
     
     protected $optional = [
         "description",
         "editable",
-        "parentID",
-        "rootSectionID"
+        "parentID"
     ];
 
     public function getDefaultFields()

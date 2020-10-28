@@ -17,14 +17,14 @@ class Group extends Model
 
     protected $default = [
         "id",
-        "name"
+        "name",
+        "membersCount"
     ];
     
     protected $optional = [
         "defaultPreviewChannel",
         "description",
-        "emailAddress",
-        "membersCount"
+        "emailAddress"
     ];
 
     public function getDefaultFields()

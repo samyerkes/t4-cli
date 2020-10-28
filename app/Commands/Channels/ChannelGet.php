@@ -14,7 +14,7 @@ class ChannelGet extends Command
      * @var string
      */
     protected $signature = 'channel:get {details?*}
-                            {--fields=id,name : Instead of returning the whole channel, returns the value of a specified field.}
+                            {--fields=id,name,rootSectionID : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}
