@@ -43,7 +43,7 @@ class ScheduleGet extends Command
         $schedules = $factory->generate($data);
         $firstSchedule = $schedules->first();
 
-        $this->print($schedules, $firstSchedule->getTimestampFields()) ;
+        $this->print($schedules, $firstSchedule->getTimestampFields());
     }
 
 }
