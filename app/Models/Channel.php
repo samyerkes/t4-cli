@@ -7,24 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     protected $fillable = [
-        "pendingVersionOutputDir",
         "rootSectionID",
-        "hasPendingVersion",
         "editable",
         "microSites",
         "id",
         "name",
         "description",
+        "parentID",
     ];
 
     protected $default = [
         "id",
         "name",
-        "rootSectionID",
     ];
     
     protected $optional = [
         "description",
+        "editable",
+        "parentID",
+        "rootSectionID"
     ];
 
     public function getDefaultFields()
