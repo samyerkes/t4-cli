@@ -22,12 +22,12 @@ class Layout extends Model
 
     protected $default = [
         "id",
-        "name",
-        "description",
-        "group",
+        "name"
     ];
     
     protected $optional = [
+        "description",
+        "group",
         "sharedgroup"
     ];
 

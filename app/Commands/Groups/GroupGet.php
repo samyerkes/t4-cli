@@ -3,6 +3,7 @@
 namespace App\Commands\Groups;
 
 use App\Command;
+use App\Factories\GroupFactory;
 
 class GroupGet extends Command
 {
@@ -25,7 +26,7 @@ class GroupGet extends Command
      *
      * @var string
      */
-    protected $description = 'Get details about a group';
+    protected $description = 'Get a list of groups';
 
     /**
      * Execute the console command.
@@ -34,27 +35,14 @@ class GroupGet extends Command
      */
     public function handle()
     {
-
-        // Arguments and options
         $this->getOptions();
 
-        // Get the details of users passed into the command
         $data = $this->getDetails('group', $this->details);
+
+        $factory = new GroupFactory();
+        $groups = $factory->generate($data);
         
-        if (count($data)) {
-            
-            // If the command has the label flag then just do an early return. 
-            if ($this->labels) return $this->printLabels($data);
-
-            $data = $this->getFilteredContent($data, $this->filters);
-            
-            $data = $this->getFieldsOfContent($data, $this->fields);
-    
-            $data = $this->sortContent($data, $this->sort, $this->order);
-    
-            $this->printWithFormatter($data, $this->format);
-        }
-
+        $this->print($groups);
     }
 
 }

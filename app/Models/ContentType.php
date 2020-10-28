@@ -23,11 +23,11 @@ class ContentType extends Model
 
     protected $default = [
         "id",
-        "alias",
-        "description"
+        "alias"
     ];
     
     protected $optional = [
+        "description",
         "group",
         "name",
         "sharedgroup"

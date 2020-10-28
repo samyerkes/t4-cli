@@ -12,13 +12,29 @@ class Group extends Model
         "description",
         "emailAddress",
         "defaultPreviewChannel",
-        "ldap",
-        "enabled"
+        "membersCount",
     ];
 
-    protected $casts = [
-        'enabled' => 'boolean',
-        'ldap' => 'boolean',
+    protected $default = [
+        "id",
+        "name"
     ];
+    
+    protected $optional = [
+        "defaultPreviewChannel",
+        "description",
+        "emailAddress",
+        "membersCount"
+    ];
+
+    public function getDefaultFields()
+    {
+        return $this->default;
+    }
+    
+    public function getOptionalFields()
+    {
+        return $this->optional;
+    }
     
 }
