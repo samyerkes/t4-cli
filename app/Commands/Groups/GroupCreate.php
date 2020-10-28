@@ -3,6 +3,7 @@
 namespace App\Commands\Groups;
 
 use App\Command;
+use App\Factories\GroupFactory;
 
 class GroupCreate extends Command
 {
@@ -13,9 +14,8 @@ class GroupCreate extends Command
      * @var string
      */
     protected $signature = 'group:create {name} {description?}
-                            {--defaultPreviewChannel=}
-                            {--emailAddress=}
-                            {--enabled=1}';
+                            {--enabled=1}
+                            {--emailAddress=}';
 
     /**
      * The description of the command.
@@ -31,20 +31,23 @@ class GroupCreate extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
-        $description = $this->argument('description');
-        $emailAddress = $this->option('emailAddress');
-        $enabled = $this->option('enabled');
+        $data = [
+            [
+                'name' => $this->argument('name'),
+                'description' => $this->argument('description'),
+                'emailAddress' => $this->option('emailAddress'),
+                'enabled' => $this->option('enabled')
+            ]
+        ];
 
-        $url = __('api.group.index');
-        $data = $this->sendRequest($url, 'post', [
-            'name' => $name,
-            'description' => $description,
-            'defaultPreviewChannel' => $defaultPreviewChannel,
-            'emailAddress' => $emailAddress
-        ]);
+        $factory = new GroupFactory();
+        $groups = $factory->generate($data);
 
-        $this->info("Success: Created group {$name}");
+        $groups->each(function($group) {
+            $request = $this->sendRequest(__('api.group.index'), 'post', $group->toArray());
+            $this->info(__('actions.create', ['model' => 'Group', 'detail' => $group->name]));
+        });
+
     }
 
 }
