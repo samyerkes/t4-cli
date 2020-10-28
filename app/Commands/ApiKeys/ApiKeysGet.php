@@ -3,6 +3,7 @@
 namespace App\Commands\ApiKeys;
 
 use App\Command;
+use App\Factories\KeyFactory;
 
 class ApiKeysGet extends Command
 {
@@ -13,7 +14,7 @@ class ApiKeysGet extends Command
      * @var string
      */
     protected $signature = 'key:get {details?*}
-                            {--fields=id,name,active,userId,invalidationDate : Instead of returning the whole api key, returns the value of a specified field.}
+                            {--fields=id,name : Instead of returning the whole api key, returns the value of a specified field.}
                             {--filter= : Instead of returning all api keys, returns the api keys who only match a specific filter.}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}
@@ -33,37 +34,16 @@ class ApiKeysGet extends Command
      * @return mixed
      */
     public function handle()
-    {
-        // Assign fields that are actually timestamps
-        $timestampFields = [
-            'lastModifiedBy',
-            'dateModified',
-            'dateCreated',
-            'invalidationDate'
-        ];
-
-        // Arguments and options
+    {   
         $this->getOptions();
 
-        // Get the details of keys passed into the command
         $data = $this->getDetails('apikey', $this->details);
 
-        if (count($data)) {
+        $factory = new KeyFactory();
+        $keys = $factory->generate($data);
+        $firstKey = $keys->first();
 
-            // If the command has the label flag then just do an early return. 
-            if ($this->labels) return $this->printLabels($data);
-        
-            $data = $this->getFilteredContent($data, $this->filters);
-            
-            $data = $this->getFieldsOfContent($data, $this->fields);
-    
-            $data = $this->convertTimestampToHumanReadable($data, $timestampFields);
-
-            $data = $this->sortContent($data, $this->sort, $this->order);
-    
-            $this->printWithFormatter($data, $this->format);
-        }
-        
+        $this->print($keys, $firstKey->getTimestampFields()) ;
     }
 
 }
