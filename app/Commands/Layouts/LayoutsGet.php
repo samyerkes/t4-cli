@@ -28,6 +28,17 @@ class LayoutsGet extends Command
      */
     protected $description = 'Get a list of layouts';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'layout',
+            'layouts',
+            'layout:list',
+            'layouts:get',
+            'layout:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

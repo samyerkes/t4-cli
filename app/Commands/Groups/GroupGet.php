@@ -28,6 +28,17 @@ class GroupGet extends Command
      */
     protected $description = 'Get a list of groups';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'group',
+            'groups',
+            'group:list',
+            'groups:get',
+            'groups:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

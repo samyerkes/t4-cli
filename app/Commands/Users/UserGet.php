@@ -28,6 +28,17 @@ class UserGet extends Command
      */
     protected $description = 'Get a list of users';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'user',
+            'users',
+            'user:list',
+            'users:get',
+            'users:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

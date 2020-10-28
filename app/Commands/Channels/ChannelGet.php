@@ -29,6 +29,17 @@ class ChannelGet extends Command
      */
     protected $description = 'Get a list of channels';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'channel',
+            'channels',
+            'channel:list',
+            'channels:get',
+            'channels:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

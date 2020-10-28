@@ -28,6 +28,20 @@ class ContentTypesGet extends Command
      */
     protected $description = 'Get a list of content types';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'ct',
+            'ct:get',
+            'ct:list',
+            'contenttype',
+            'contenttypes',
+            'contenttype:list',
+            'contenttypes:get',
+            'contenttypes:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

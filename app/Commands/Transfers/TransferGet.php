@@ -28,6 +28,17 @@ class TransferGet extends Command
      */
     protected $description = 'Get a list of transfers';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'transfer',
+            'transfers',
+            'transfer:list',
+            'transfers:get',
+            'transfers:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

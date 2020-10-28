@@ -28,6 +28,17 @@ class ApiKeysGet extends Command
      */
     protected $description = 'Get a list of API keys';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'key',
+            'keys',
+            'key:list',
+            'keys:get',
+            'keys:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *

@@ -28,6 +28,17 @@ class ScheduleGet extends Command
      */
     protected $description = 'Get a list of scheduled jobs';
 
+    protected function configure(): void
+    {
+        $this->setAliases([
+            'schedule',
+            'schedules',
+            'schedule:list',
+            'schedules:get',
+            'schedules:list'
+        ]);
+    }
+
     /**
      * Execute the console command.
      *
