@@ -7,7 +7,7 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | Command              | Description                                    | Arguments                                                   | Flags                                                                          | Default Format |
 | -------------------- |------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------------------------|----------------|
 | t4 about             | Get details about the application, host and os |                                                             | --fields --format                                                              | Table          |
-| t4 channel:get       | Gets details about a channel                   | {details?*}                                                 | --fields --filter --format -m|--microsite --order --sort                       | Table          |
+| t4 channel:get       | Get a list of channels                         | {details?*}                                                 | --fields --filter --format -m|--microsite --order --sort                       | Table          |
 | t4 configure         | Configures the CLI                             |                                                             |                                                                                | None           |
 | t4 contenttypes:get  | Gets details about a content type              | {details?*}                                                 | --fields --filter --format --order --sort                                      | Table          |
 | t4 group:attach      | Attaches a list of users to a group            | {group} {users*}                                            |                                                                                | None           |
@@ -61,10 +61,6 @@ To switch your profile just export a new `T4_PROFILE` variable.
 
 The commands have been architected so you can do some interesting chaining using the --format=id and --format=text option. Here are some interesting ideas to get you started.
 
-Get all group members from a list of groups.
-```
-t4 group:get "Group 1" "Group 2" --format=id | xargs t4 group:members
-```
 
 Get all channels that have a transfer attached to them.
 ```

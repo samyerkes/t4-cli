@@ -14,7 +14,7 @@ class LayoutsGet extends Command
      * @var string
      */
     protected $signature = 'layout:get {details?*}
-                            {--fields=id,name,description,group : Instead of returning the whole layout, returns the value of a specified field. (optional)}
+                            {--fields=id,name,group : Instead of returning the whole layout, returns the value of a specified field. (optional)}
                             {--filter= : Instead of returning all layouts, returns the layouts who only match a specific filter. (optional)}
                             {--format=table}
                             {--l|labels : Prints the available labels you can use in the fields option.}

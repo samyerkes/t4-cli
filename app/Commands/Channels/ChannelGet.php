@@ -3,6 +3,7 @@
 namespace App\Commands\Channels;
 
 use App\Command;
+use App\Factories\ChannelFactory;
 
 class ChannelGet extends Command
 { 
@@ -12,7 +13,7 @@ class ChannelGet extends Command
      *
      * @var string
      */
-    protected $signature = 'channel:get {channels?*}
+    protected $signature = 'channel:get {details?*}
                             {--fields=id,name,rootSectionID : Instead of returning the whole channel, returns the value of a specified field.}
                             {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
                             {--format=table}
@@ -26,7 +27,7 @@ class ChannelGet extends Command
      *
      * @var string
      */
-    protected $description = 'Gets details about a channel';
+    protected $description = 'Get a list of channels';
 
     /**
      * Execute the console command.
@@ -35,34 +36,16 @@ class ChannelGet extends Command
      */
     public function handle()
     {
-        // Arguments and options
-        $channels = $this->argument('channels');
-        $labels = $this->option('labels');
-        $micrositeOption = $this->option('microsite');
-        $sortField = $this->option('sort');
-        $sortOrder = $this->option('order');
-        $format = $this->option('format');
-        $fields = $this->fields($this->option('fields'));
-        $filter = $this->filter($this->option('filter'));
+        $this->getOptions();
 
-        $option = $micrositeOption ? 'channelmicrosite' : 'channel';
+        $option = $this->option('microsite') ? 'channelmicrosite' : 'channel';
         
-        $data = $this->getDetails($option, $channels);
+        $data = $this->getDetails($option, $this->details);
 
-        if (count($data)) {
-            
-            // If the command has the label flag then just do an early return. 
-            if ($labels) return $this->printLabels($data);
-
-            $data = $this->getFilteredContent($data, $filter);
-            
-            $data = $this->getFieldsOfContent($data, $fields);
-    
-            $data = $this->sortContent($data, $sortField, $sortOrder);
-    
-            $this->printWithFormatter($data, $format);
-        }
-
+        $factory = new ChannelFactory();
+        $channel = $factory->generate($data);
+        
+        $this->print($channel);
     }
 
 }
