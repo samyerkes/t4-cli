@@ -63,8 +63,8 @@ class GroupAttach extends Command
             'description' => $group['description'],
             'members' => $newMembers
         ]);
-
-        $this->info("Success: Updated group " . $group['name']);
+        
+        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
     }
 
 }

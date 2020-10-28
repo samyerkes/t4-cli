@@ -60,7 +60,7 @@ class GroupDetach extends Command
             'members' => $newMembers
         ]);
 
-        $this->info("Success: Updated group " . $group['name']);
+        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
     }
 
 }
