@@ -43,7 +43,6 @@ class NavigationGet extends Command
         $navigations = $factory->generate($data);
         
         $this->print($navigations);
-        
     }
 
 }

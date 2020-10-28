@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Customizable;
-use Carbon\Carbon;
 
 class Key extends Model
 {
