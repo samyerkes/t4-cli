@@ -9,17 +9,11 @@ class GroupGet extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'group:get {details?*}
-                            {--fields=id,name,membersCount : Instead of returning the whole group, returns the value of a specified field.}
-                            {--filter= : Instead of returning all groups, returns the groups who only match a specific filter.}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'group:get';
 
     /**
      * The description of the command.
@@ -28,16 +22,29 @@ class GroupGet extends Command
      */
     protected $description = 'Get a list of groups';
 
-    public function configure(): void
-    {
-        $this->setAliases([
-            'group',
-            'groups',
-            'group:list',
-            'groups:get',
-            'groups:list'
-        ]);
-    }
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'group',
+        'groups',
+        'group:list',
+        'groups:get',
+        'groups:list'
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'id' ,
+        'name',
+        'membersCount' 
+    ];
 
     /**
      * Execute the console command.
@@ -48,7 +55,7 @@ class GroupGet extends Command
     {
         $this->getOptions();
 
-        $data = $this->getDetails('group', $this->details);
+        $data = $this->getDetails('group', $this->argument('details'));
 
         $factory = new GroupFactory();
         $groups = $factory->generate($data);
