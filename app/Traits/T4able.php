@@ -17,6 +17,7 @@ Trait T4able
         
         if (!$response->ok()) {
             $this->error($response);
+            die();
         }
 
         return collect($response->json());
