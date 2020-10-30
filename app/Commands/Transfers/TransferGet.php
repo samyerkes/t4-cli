@@ -28,7 +28,7 @@ class TransferGet extends Command
      */
     protected $description = 'Get a list of transfers';
 
-    protected function configure(): void
+    public function configure(): void
     {
         $this->setAliases([
             'transfer',

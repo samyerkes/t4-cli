@@ -28,7 +28,7 @@ class GroupGet extends Command
      */
     protected $description = 'Get a list of groups';
 
-    protected function configure(): void
+    public function configure(): void
     {
         $this->setAliases([
             'group',

@@ -28,7 +28,7 @@ class NavigationGet extends Command
      */
     protected $description = 'Get a list of navigations';
 
-    protected function configure(): void
+    public function configure(): void
     {
         $this->setAliases([
             'nav',

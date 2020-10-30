@@ -7,48 +7,27 @@ use App\Factories\KeyFactory;
 
 class ApiKeysGet extends Command
 {
-    
-    /**
-     * The signature of the command.
-     *
-     * @var string
-     */
-    protected $signature = 'key:get {details?*}
-                            {--fields=id,name,userId,invalidationDate : Instead of returning the whole api key, returns the value of a specified field.}
-                            {--filter= : Instead of returning all api keys, returns the api keys who only match a specific filter.}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'key:get';
 
-    /**
-     * The description of the command.
-     *
-     * @var string
-     */
     protected $description = 'Get a list of API keys';
 
-    protected function configure(): void
-    {
-        $this->setAliases([
-            'key',
-            'keys',
-            'key:list',
-            'keys:get',
-            'keys:list'
-        ]);
-    }
+    protected $aliases = [
+        'key',
+        'keys',
+        'key:list',
+        'keys:get',
+        'keys:list'
+    ];
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+    protected $fields = [
+        'id' ,
+        'name',
+        'invalidationDate' 
+    ];
+
     public function handle()
     {   
-        $this->getOptions();
-
-        $data = $this->getDetails('apikey', $this->details);
+        $data = $this->getDetails('apikey', $this->argument('details'));
 
         $factory = new KeyFactory();
         $keys = $factory->generate($data);

@@ -16,7 +16,7 @@ Trait Customizable
 
     public function getFilteredContent($data, $filter) : array
     {
-        if ($filter[0] == '') return $data->toArray();
+        if (!$filter) return $data->toArray();
 
         $data =  $data->filter(function ($d) use ($filter) {
             list($attr, $val) = $filter;
@@ -28,7 +28,8 @@ Trait Customizable
     public function getFieldsOfContent($data, $fields) : array
     {
         // if a single piece of data wrap it in an array to make it multidimensional
-        $data = array_key_exists(0, $data) ? $data : [$data];
+        $data = is_array($data) ? $data : [$data];
+        $fields = is_array($fields) ? $fields : explode(',', $fields);
         
         $fieldsArray = [];
         foreach ($data as $d) {

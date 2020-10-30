@@ -7,38 +7,23 @@ use App\Factories\ChannelFactory;
 
 class ChannelGet extends Command
 { 
-    
-    /**
-     * The signature of the command.
-     *
-     * @var string
-     */
-    protected $signature = 'channel:get {details?*}
-                            {--fields=id,name,rootSectionID : Instead of returning the whole channel, returns the value of a specified field.}
-                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--m|microsite}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'channel:get';
 
-    /**
-     * The description of the command.
-     *
-     * @var string
-     */
     protected $description = 'Get a list of channels';
 
-    protected function configure(): void
-    {
-        $this->setAliases([
-            'channel',
-            'channels',
-            'channel:list',
-            'channels:get',
-            'channels:list'
-        ]);
-    }
+    protected $aliases = [
+        'channel',
+        'channels',
+        'channel:list',
+        'channels:get',
+        'channels:list'
+    ];
+
+    protected $fields = [
+        'id',
+        'name',
+        'rootSectionID'
+    ];
 
     /**
      * Execute the console command.
@@ -47,11 +32,10 @@ class ChannelGet extends Command
      */
     public function handle()
     {
-        $this->getOptions();
-
-        $option = $this->option('microsite') ? 'channelmicrosite' : 'channel';
+        // $option = $this->option('microsite') ? 'channelmicrosite' : 'channel';
+        $option = 'channel';
         
-        $data = $this->getDetails($option, $this->details);
+        $data = $this->getDetails($option, $this->argument('details'));
 
         $factory = new ChannelFactory();
         $channels = $factory->generate($data);
