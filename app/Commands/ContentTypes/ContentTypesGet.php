@@ -9,17 +9,11 @@ class ContentTypesGet extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'contenttype:get {details?*}
-                            {--fields=id,alias,group : Return specific fields.}
-                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'contenttype:get';
 
     /**
      * The description of the command.
@@ -28,19 +22,32 @@ class ContentTypesGet extends Command
      */
     protected $description = 'Get a list of content types';
 
-    public function configure(): void
-    {
-        $this->setAliases([
-            'ct',
-            'ct:get',
-            'ct:list',
-            'contenttype',
-            'contenttypes',
-            'contenttype:list',
-            'contenttypes:get',
-            'contenttypes:list'
-        ]);
-    }
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'ct',
+        'ct:get',
+        'ct:list',
+        'contenttype',
+        'contenttypes',
+        'contenttype:list',
+        'contenttypes:get',
+        'contenttypes:list'
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'id' ,
+        'alias',
+        'group' 
+    ];
 
     /**
      * Execute the console command.
@@ -51,13 +58,12 @@ class ContentTypesGet extends Command
     {
         $this->getOptions();
 
-        $data = $this->getDetails('contenttype', $this->details);
+        $data = $this->getDetails('contenttype', $this->argument('details'));
 
         $factory = new ContentTypeFactory();
         $contenttypes = $factory->generate($data);
 
         $this->print($contenttypes);
-
     }
 
 }
