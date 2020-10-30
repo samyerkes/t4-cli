@@ -16,7 +16,9 @@ Trait Customizable
 
     public function getFilteredContent($data, $filter) : array
     {
-        if (!$filter) return $data->toArray();
+        if (!$filter) {
+            return is_array($data) ? $data : $data->toArray();
+        }
 
         $data =  $data->filter(function ($d) use ($filter) {
             list($attr, $val) = $filter;

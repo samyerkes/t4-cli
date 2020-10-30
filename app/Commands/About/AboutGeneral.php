@@ -8,13 +8,11 @@ class AboutGeneral extends Command
 { 
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'about
-                        {--fields=hostname,t4,uptime,os : Return specific fields about the general about information.}
-                        {--format=table}';
+    protected $name = 'about';
 
     /**
      * The description of the command.
@@ -22,6 +20,27 @@ class AboutGeneral extends Command
      * @var string
      */
     protected $description = 'Get details about the application, host and os';
+
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'info',
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'hostname' ,
+        't4',
+        'uptime',
+        'os' 
+    ];
 
     /**
      * Execute the console command.
@@ -40,7 +59,7 @@ class AboutGeneral extends Command
                 't4' => implode(" ", $data['t4']['version']),
                 'uptime' => $data['t4']['uptime'],
                 'hostname' => $data['os']['localHostname'],
-                'java' => $data['java']['home'],
+                'java' => "Version " . $data['java']['version'] . ' ' . $data['java']['home'],
                 'os' => $data['os']['name'] . ' ' . $data['os']['arch'],
                 'user' => implode(" ", $data['user']),
                 'servlet' => implode(" ", $data['servlet']),
@@ -48,15 +67,7 @@ class AboutGeneral extends Command
             ]
         ];
 
-        $fields = $this->fields($this->option('fields'));
-        
-        $format = $this->option('format');
-
-        $data = array_values($data);
-        
-        $data = $this->getFieldsOfContent($data, $fields);
-        
-        $this->printWithFormatter($data, $format);
+        $this->print($data) ;
         
     }
 
