@@ -7,10 +7,25 @@ use App\Factories\KeyFactory;
 
 class ApiKeysGet extends Command
 {
+    /**
+     * The name of the command.
+     *
+     * @var string
+     */
     protected $name = 'key:get';
 
+    /**
+     * The description of the command.
+     *
+     * @var string
+     */
     protected $description = 'Get a list of API keys';
 
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
     protected $aliases = [
         'key',
         'keys',
@@ -19,6 +34,11 @@ class ApiKeysGet extends Command
         'keys:list'
     ];
 
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
     protected $fields = [
         'id' ,
         'name',

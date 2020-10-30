@@ -7,10 +7,25 @@ use App\Factories\UserFactory;
 
 class UserGet extends Command
 {
+    /**
+     * The name of the command.
+     *
+     * @var string
+     */
     protected $name = 'user:get';
 
+    /**
+     * The description of the command.
+     *
+     * @var string
+     */
     protected $description = 'Get a list of users';
 
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
     protected $aliases = [
         'user',
         'users',
@@ -19,6 +34,11 @@ class UserGet extends Command
         'users:list'
     ];
 
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
     protected $fields = [
         'id',
         'username'
