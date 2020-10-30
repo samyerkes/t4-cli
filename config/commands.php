@@ -87,7 +87,6 @@ return [
         Illuminate\Database\Console\Factories\FactoryMakeCommand::class,
         Illuminate\Foundation\Console\ModelMakeCommand::class,
         Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
-        LaravelZero\Framework\Commands\MakeCommand::class,
         LaravelZero\Framework\Commands\RenameCommand::class,
         LaravelZero\Framework\Commands\StubPublishCommand::class,
         LaravelZero\Framework\Commands\InstallCommand::class,
