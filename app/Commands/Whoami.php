@@ -3,18 +3,17 @@
 namespace App\Commands;
 
 use App\Command;
+use App\Factories\UserFactory;
 
 class Whoami extends Command
 {
 
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'whoami
-                            {--fields=username,emailAddress,firstName,lastName : Instead of returning the whole user, returns the value of a specified field. (optional)}
-                            {--format=table}';
+    protected $name = 'whoami';
 
     /**
      * The description of the command.
@@ -22,6 +21,28 @@ class Whoami extends Command
      * @var string
      */
     protected $description = 'Displays information about the auth\'d user';
+
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'who',
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'username' ,
+        'role',
+        'emailAddress',
+        'firstName',
+        'lastName' 
+    ];
 
     /**
      * Execute the console command.
@@ -34,15 +55,12 @@ class Whoami extends Command
         
         $data = $this->sendRequest($url);
 
-        $fields = $this->fields($this->option('fields'));
+        $data = [$data];
 
-        $format = $this->option('format');
+        $factory = new UserFactory();
+        $users = $factory->generate($data);
 
-        $data = $data->toArray();
-
-        $data = $this->getFieldsOfContent($data, $fields);
-
-        $this->printWithFormatter($data, $format);
+        $this->print($users);
     }
 
 }

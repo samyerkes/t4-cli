@@ -15,6 +15,7 @@ class UserFactory {
         $users = collect([]);
         foreach ($data as $user) 
         {
+            if (gettype($user) == 'object') $user = $user->toArray();
             $userDTO = new User;
             $userDTO = $userDTO->fill($user);
             $users->push($userDTO);

@@ -67,7 +67,7 @@ class AboutGeneral extends Command
             ]
         ];
 
-        $this->print($data) ;
+        $this->print($data);
         
     }
 

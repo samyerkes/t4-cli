@@ -15,6 +15,7 @@ class User extends Model
         "defaultLang",
         "enabled",
         "authLevel",
+        "userLevel",
         "deleted",
         "role",
         "password",
