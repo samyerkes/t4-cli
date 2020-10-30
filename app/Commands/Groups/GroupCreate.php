@@ -25,6 +25,17 @@ class GroupCreate extends Command
     protected $description = 'Creates a group';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'groups:create',
+        'group:new',
+        'groups:new',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

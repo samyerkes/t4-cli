@@ -28,6 +28,17 @@ class GroupUpdate extends Command
     protected $description = 'Updates details about a group';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'groups:update',
+        'group:edit',
+        'groups:edit',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -38,7 +49,7 @@ class GroupUpdate extends Command
         $this->getOptions();
 
         // Get the details of users passed into the command
-        $data = $this->getDetails('group', $this->details);
+        $data = $this->getDetails('group', $this->argument('details'));
 
         $factory = new GroupFactory();
         $groups = $factory->generate($data);

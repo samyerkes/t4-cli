@@ -3,16 +3,17 @@
 namespace App\Commands\Groups;
 
 use App\Command;
+use App\Factories\GroupFactory;
 
 class GroupDelete extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'group:delete {group}';
+    protected $name = 'group:delete';
 
     /**
      * The description of the command.
@@ -22,21 +23,34 @@ class GroupDelete extends Command
     protected $description = 'Deletes a groups';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'groups:delete'
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        $group = $this->argument('group');
+        $data = $this->getDetails('group', $this->argument('details'));
 
-        $group = $this->getDetails('group', $group)->first();
-
-        $url = __('api.group.show', ['group' => $group['id']]);
+        $factory = new GroupFactory();
+        $groups = $factory->generate($data);
         
-        $data = $this->sendRequest($url, 'delete');
-
-        $this->info("Success: Deleted group {$group['name']}");
+        foreach ($groups as $group) 
+        {   
+            $url = __('api.group.show', ['group' => $group['id']]);
+        
+            $data = $this->sendRequest($url, 'delete');
+    
+            $this->info(__('actions.delete', ['model' => 'Group', 'detail' => $group['name']]));
+        }
 
     }
 

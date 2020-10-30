@@ -64,8 +64,6 @@ class GroupGet extends Command
      */
     public function handle()
     {
-        $this->getOptions();
-
         $data = $this->getDetails('group', $this->argument('details'));
 
         $factory = new GroupFactory();

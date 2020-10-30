@@ -22,6 +22,15 @@ class GroupDetach extends Command
     protected $description = 'Detaches a list of users from a group';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'groups:detach',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

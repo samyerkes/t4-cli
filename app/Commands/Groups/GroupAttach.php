@@ -22,6 +22,15 @@ class GroupAttach extends Command
     protected $description = 'Attaches a list of users to a group';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'groups:attach',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed
