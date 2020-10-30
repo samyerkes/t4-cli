@@ -43,6 +43,17 @@ class AboutGeneral extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "java",
+        "user",
+        "servlet"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

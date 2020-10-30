@@ -20,20 +20,6 @@ class Transfer extends Model
         "isCleanServer"
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "remoteHost"
-    ];
-    
-    protected $optional = [
-        "description",
-        "remoteRoot",
-        "transferType",
-        "channelID",
-        "isCleanServer"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

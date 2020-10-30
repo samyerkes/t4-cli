@@ -28,6 +28,17 @@ class ChannelGet extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "description",
+        "editable",
+        "parentID"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

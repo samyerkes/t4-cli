@@ -15,18 +15,6 @@ class Group extends Model
         "membersCount",
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "membersCount"
-    ];
-    
-    protected $optional = [
-        "defaultPreviewChannel",
-        "description",
-        "emailAddress"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

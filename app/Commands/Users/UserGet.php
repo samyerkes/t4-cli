@@ -45,6 +45,21 @@ class UserGet extends Command
         'role'
     ];
 
+    /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "firstName",
+        "lastName",
+        "emailAddress",
+        "defaultLang",
+        "enabled",
+        "authLevel",
+        "deleted"
+    ];
+
     public function handle()
     {
         $data = $this->getDetails('user', $this->argument('details'));

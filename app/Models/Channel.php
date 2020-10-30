@@ -16,18 +16,6 @@ class Channel extends Model
         "parentID",
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "rootSectionID"
-    ];
-    
-    protected $optional = [
-        "description",
-        "editable",
-        "parentID"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

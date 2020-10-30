@@ -20,17 +20,6 @@ class Layout extends Model
         'sharedgroup'
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "group"
-    ];
-    
-    protected $optional = [
-        "description",
-        "sharedgroup"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

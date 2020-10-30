@@ -19,7 +19,10 @@ class User extends Model
         "deleted",
         "role",
         "password",
-        "authenticationMappingList"
+        "authenticationMappingList",
+        "htmlEditorId",
+        "uiLocale",
+        "defaultPreviewChannelId"
     ];
 
     protected $casts = [
@@ -29,22 +32,6 @@ class User extends Model
 
     protected $appends = [
         'role'
-    ];
-
-    protected $default = [
-        "id",
-        "name",
-        "role"
-    ];
-    
-    protected $optional = [
-        "firstName",
-        "lastName",
-        "emailAddress",
-        "defaultLang",
-        "enabled",
-        "authLevel",
-        "deleted"
     ];
 
     public function getDefaultFields()

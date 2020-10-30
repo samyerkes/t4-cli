@@ -26,26 +26,6 @@ class Schedule extends Model
         "sourceSection"
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "nextDue"
-    ];
-    
-    protected $optional = [
-        "jobClass",
-        "status",
-        "creationDate",
-        "fixedRate",
-        "executionInterval",
-        "executionCount",
-        "executionClass",
-        "maximumExecutions",
-        "archiveContentID",
-        "archiveSection",
-        "sourceSection"
-    ];
-
     public $timestamps = [
         'creationDate',
         'nextDue'

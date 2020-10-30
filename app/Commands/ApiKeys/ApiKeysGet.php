@@ -42,7 +42,21 @@ class ApiKeysGet extends Command
     protected $fields = [
         'id' ,
         'name',
+        "userId",
         'invalidationDate' 
+    ];
+
+    /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "active",
+        "deleted",
+        "dateModified",
+        "dateCreated",
+        "expired"
     ];
 
     public function handle()

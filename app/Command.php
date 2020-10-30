@@ -14,6 +14,8 @@ class Command extends LaravelCommand
     use Customizable, T4able;
 
     protected $fields = ['id'];
+    
+    protected $optionalFields = [];
 
     protected $aliases = [];
 
@@ -60,8 +62,9 @@ class Command extends LaravelCommand
 
     public function print($data, $timestampFields = null)
     {
+        if ($this->option('labels')) return $this->printLabels($this->fields, $this->optionalFields);
+        
         if (count($data)) {
-            if ($this->option('labels')) return $this->printLabels($data);
 
             $data = $this->getFilteredContent($data, $this->option('filters'));
 

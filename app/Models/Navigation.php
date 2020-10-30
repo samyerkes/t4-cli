@@ -23,21 +23,6 @@ class Navigation extends Model
         'sharedgroup'
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "group",
-    ];
-    
-    protected $optional = [
-        "description",
-        "navigationType",
-        "navigationTypeName",
-        "editable",
-        "sharedgroup",
-        "sharedGroupCount"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

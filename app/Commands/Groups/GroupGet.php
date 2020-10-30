@@ -47,6 +47,17 @@ class GroupGet extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "defaultPreviewChannel",
+        "description",
+        "emailAddress"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

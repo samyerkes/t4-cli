@@ -47,6 +47,19 @@ class TransferGet extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "description",
+        "remoteRoot",
+        "transferType",
+        "channelID",
+        "isCleanServer"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

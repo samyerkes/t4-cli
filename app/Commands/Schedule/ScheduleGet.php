@@ -47,6 +47,25 @@ class ScheduleGet extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "jobClass",
+        "status",
+        "creationDate",
+        "fixedRate",
+        "executionInterval",
+        "executionCount",
+        "executionClass",
+        "maximumExecutions",
+        "archiveContentID",
+        "archiveSection",
+        "sourceSection"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

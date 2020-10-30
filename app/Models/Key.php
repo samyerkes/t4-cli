@@ -21,21 +21,6 @@ class Key extends Model
         "expired"
     ];
 
-    protected $default = [
-        "id",
-        "name",
-        "userId",
-        "invalidationDate"
-    ];
-    
-    protected $optional = [
-        "active",
-        "deleted",
-        "dateModified",
-        "dateCreated",
-        "expired"
-    ];
-
     public $timestamps = [
         'dateModified',
         'dateCreated',

@@ -144,11 +144,10 @@ Trait Customizable
         return $data->toArray();
     }
 
-    public function printLabels($data)
+    public function printLabels(array $default, array $optional)
     {
-        $first = $data->first();
-        $this->line('Default: ' . implode(', ', $first->getDefaultFields()));
-        $this->line('Optional: ' . implode(', ', $first->getOptionalFields()));
+        $this->line('Default: ' . implode(', ', $default));
+        $this->line('Optional: ' . implode(', ', $optional));
     }
     
 }

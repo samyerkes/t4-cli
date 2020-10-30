@@ -21,18 +21,6 @@ class ContentType extends Model
         'sharedgroup'
     ];
 
-    protected $default = [
-        "id",
-        "alias",
-        "group"
-    ];
-    
-    protected $optional = [
-        "description",
-        "name",
-        "sharedgroup"
-    ];
-
     public function getDefaultFields()
     {
         return $this->default;

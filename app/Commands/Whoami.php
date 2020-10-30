@@ -45,6 +45,19 @@ class Whoami extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "defaultLanguage",
+        "uiLocale",
+        "htmlEditorId",
+        "defaultPreviewChannelId",
+        "userLevel"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed

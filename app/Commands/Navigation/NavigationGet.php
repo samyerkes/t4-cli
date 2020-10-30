@@ -50,6 +50,20 @@ class NavigationGet extends Command
     ];
 
     /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "description",
+        "navigationType",
+        "navigationTypeName",
+        "editable",
+        "sharedgroup",
+        "sharedGroupCount"
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed
