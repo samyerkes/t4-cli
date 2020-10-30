@@ -41,7 +41,8 @@ class UserGet extends Command
      */
     protected $fields = [
         'id',
-        'username'
+        'username',
+        'role'
     ];
 
     public function handle()
