@@ -65,20 +65,17 @@ class AboutGeneral extends Command
         
         $data = $this->sendRequest($url);
         
-        $data = [
-            [
-                't4' => implode(" ", $data['t4']['version']),
-                'uptime' => $data['t4']['uptime'],
-                'hostname' => $data['os']['localHostname'],
-                'java' => "Version " . $data['java']['version'] . ' ' . $data['java']['home'],
-                'os' => $data['os']['name'] . ' ' . $data['os']['arch'],
-                'user' => implode(" ", $data['user']),
-                'servlet' => implode(" ", $data['servlet']),
-                
-            ]
+        $builtData = [
+            't4' => isset($data['t4']['version']) ? implode(" ", $data['t4']['version']) : '',
+            'uptime' => isset($data['t4']['uptime']) ? $data['t4']['uptime'] : '',
+            'hostname' => $data['os']['localHostname'],
+            'java' => isset($data['java']) ? "Version " . $data['java']['version'] . ' ' . $data['java']['home'] : '',
+            'os' => isset($data['os']) ? $data['os']['name'] . ' ' . $data['os']['arch'] : '',
+            'user' => isset($data['user']) ? implode(" ", $data['user']) : '',
+            'servlet' => isset($data['servlet']) ? implode(" ", $data['servlet']) : ''
         ];
 
-        $this->print($data);
+        $this->print([$builtData]);
         
     }
 
