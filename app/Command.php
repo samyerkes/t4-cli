@@ -54,7 +54,7 @@ class Command extends LaravelCommand
             ['fields', null, InputOption::VALUE_OPTIONAL, 'Return specific fields from a record', $this->fields],
             ['filters', null, InputOption::VALUE_OPTIONAL, 'Return only certain records that match a particular filter'],
             ['format', null, InputOption::VALUE_OPTIONAL, 'Return the records in a specific format', $this->format],
-            ['labels', null, InputOption::VALUE_NONE, 'Return all default and optional fields for a command'],
+            ['labels', '-l', InputOption::VALUE_NONE, 'Return all default and optional fields for a command'],
             ['order', null, InputOption::VALUE_OPTIONAL, 'Order the returned records in asc or desc order', $this->order],
             ['sort', null, InputOption::VALUE_OPTIONAL, 'Sort the returned records based on a field', $this->sort]
         ];

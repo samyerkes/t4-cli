@@ -64,7 +64,7 @@ class ChannelGet extends Command
      */
     public function getOptions()
     {
-        $microsite = [['microsite', null, InputOption::VALUE_NONE, 'If you want to include microsites in the results']];
+        $microsite = [['microsite', '-m', InputOption::VALUE_NONE, 'If you want to include microsites in the results']];
 
         return array_merge(parent::getOptions(), $microsite);
     }
