@@ -8,11 +8,11 @@ use Storage;
 class Configure extends Command
 {
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'configure';
+    protected $name = 'configure';
 
     /**
      * The description of the command.
