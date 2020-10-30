@@ -9,18 +9,27 @@ class UserDelete extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'user:delete {details?*}';
+    protected $name = 'user:delete';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Deletes one or more users';
+    protected $description = 'Deletes a user';
+
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'users:delete'
+    ];
 
     /**
      * Execute the console command.
@@ -29,11 +38,8 @@ class UserDelete extends Command
      */
     public function handle()
     {
-        // Arguments and options
-        $this->getOptions();
-
         // Get the details of users passed into the command
-        $data = $this->getDetails('user', $this->details);
+        $data = $this->getDetails('user', $this->argument('details'));
 
         $factory = new UserFactory();
         $users = $factory->generate($data);

@@ -24,7 +24,18 @@ class UserCreate extends Command
      *
      * @var string
      */
-    protected $description = 'Creates a new user';
+    protected $description = 'Creates a user';
+
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'user:new',
+        'users:new',
+        'users:create'
+    ];
 
     /**
      * Execute the console command.

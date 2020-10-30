@@ -8,24 +8,29 @@ class UserGroups extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'user:groups {details?*}
-                            {--fields=id,name : Instead of returning the whole user, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all users, returns the users who only match a specific filter.}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'user:groups';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Gets group details for one or more users.';
+    protected $description = 'Gets group details for one or more users';
+
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'users:groups',
+        'users:group',
+        'user:group'
+    ];
 
     /**
      * Execute the console command.

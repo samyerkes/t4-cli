@@ -30,17 +30,25 @@ class UserUpdate extends Command
     protected $description = 'Updates details about a user';
 
     /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'users:update',
+        'user:edit',
+        'users:edit',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        // Arguments and options
-        $this->getOptions();
-
         // Get the details of users passed into the command
-        $data = $this->getDetails('user', $this->details);
+        $data = $this->getDetails('user', $this->argument('details'));
 
         $factory = new UserFactory();
         $users = $factory->generate($data);
