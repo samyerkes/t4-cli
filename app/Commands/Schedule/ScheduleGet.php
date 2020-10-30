@@ -9,17 +9,11 @@ class ScheduleGet extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'schedule:get {details?*}
-                            {--fields=id,name,nextDue : Instead of returning the whole schedule, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all schedules, returns the schedules who only match a specific filter. (optional)}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'schedule:get';
 
     /**
      * The description of the command.
@@ -28,16 +22,29 @@ class ScheduleGet extends Command
      */
     protected $description = 'Get a list of scheduled jobs';
 
-    public function configure(): void
-    {
-        $this->setAliases([
-            'schedule',
-            'schedules',
-            'schedule:list',
-            'schedules:get',
-            'schedules:list'
-        ]);
-    }
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'schedule',
+        'schedules',
+        'schedule:list',
+        'schedules:get',
+        'schedules:list'
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'id' ,
+        'name',
+        'nextDue' 
+    ];
 
     /**
      * Execute the console command.
@@ -48,7 +55,7 @@ class ScheduleGet extends Command
     {
         $this->getOptions();
 
-        $data = $this->getDetails('schedule', $this->details);
+        $data = $this->getDetails('schedule', $this->argument('details'));
         
         $factory = new ScheduleFactory();
         $schedules = $factory->generate($data);

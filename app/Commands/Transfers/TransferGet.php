@@ -9,17 +9,11 @@ class TransferGet extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'transfer:get {details?*}
-                            {--fields=id,name,remoteHost : Instead of returning the whole transfer, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all transfers, returns the transfers who only match a specific filter. (optional)}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'transfer:get';
 
     /**
      * The description of the command.
@@ -28,16 +22,29 @@ class TransferGet extends Command
      */
     protected $description = 'Get a list of transfers';
 
-    public function configure(): void
-    {
-        $this->setAliases([
-            'transfer',
-            'transfers',
-            'transfer:list',
-            'transfers:get',
-            'transfers:list'
-        ]);
-    }
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'transfer',
+        'transfers',
+        'transfer:list',
+        'transfers:get',
+        'transfers:list'
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'id' ,
+        'name',
+        'remoteHost' 
+    ];
 
     /**
      * Execute the console command.
@@ -48,7 +55,7 @@ class TransferGet extends Command
     {
         $this->getOptions();
 
-        $data = $this->getDetails('transfer', $this->details);
+        $data = $this->getDetails('transfer', $this->argument('details'));
 
         $factory = new TransferFactory();
         $transfers = $factory->generate($data);

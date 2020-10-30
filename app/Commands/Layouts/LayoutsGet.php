@@ -9,17 +9,11 @@ class LayoutsGet extends Command
 {
     
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'layout:get {details?*}
-                            {--fields=id,name,group : Instead of returning the whole layout, returns the value of a specified field. (optional)}
-                            {--filter= : Instead of returning all layouts, returns the layouts who only match a specific filter. (optional)}
-                            {--format=table}
-                            {--l|labels : Prints the available labels you can use in the fields option.}
-                            {--sort=id}
-                            {--order=desc}';
+    protected $name = 'layout:get';
 
     /**
      * The description of the command.
@@ -28,16 +22,29 @@ class LayoutsGet extends Command
      */
     protected $description = 'Get a list of layouts';
 
-    public function configure(): void
-    {
-        $this->setAliases([
-            'layout',
-            'layouts',
-            'layout:list',
-            'layouts:get',
-            'layout:list'
-        ]);
-    }
+    /**
+     * The aliases of the command.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'layout',
+        'layouts',
+        'layout:list',
+        'layouts:get',
+        'layout:list'
+    ];
+
+    /**
+     * The default fields the command will return.
+     *
+     * @var array
+     */
+    protected $fields = [
+        'id' ,
+        'name',
+        'group' 
+    ];
 
     /**
      * Execute the console command.
@@ -48,7 +55,7 @@ class LayoutsGet extends Command
     {
         $this->getOptions();
         
-        $data = $this->getDetails('layout', $this->details);
+        $data = $this->getDetails('layout', $this->argument('details'));
         
         $factory = new LayoutFactory();
         $layouts = $factory->generate($data);
