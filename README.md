@@ -77,6 +77,11 @@ Change the role level of all users in a particular group.
 t4 group:members "My group" --format=id | xargs t4 user:update --role=contributor
 ```
 
+Delete all users that belong to a particular group
+```
+t4 user delete $(t4 group:members "My group" --format=id)
+```
+
 ## Labels
 
 Each `get` command comes with default returned attributes, but there may be circumstances where you need to use other fields. To find out the available fields you can use, pass the `-l` or `--labels` option to print the fields available to that command.
