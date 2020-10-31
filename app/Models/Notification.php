@@ -36,7 +36,7 @@ class Notification extends Model
 
     public function getUserAttribute()
     {
-        return $this->users[0]['fullName'] ?? '';
+        return $this->users[0]['username'] ?? '';
     }
     
     public function getLogAttribute()
@@ -47,6 +47,16 @@ class Notification extends Model
     public function getTypeAttribute()
     {
         return $this->properties['type'] ?? '';
+    }
+    
+    public function getExecutionTimeAttribute()
+    {
+        return $this->executionTime ?? '';
+    }
+    
+    public function getCompletionTimeAttribute()
+    {
+        return $this->completionTime ?? '';
     }
     
 }

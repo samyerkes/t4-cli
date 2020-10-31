@@ -126,7 +126,9 @@ Trait Customizable
         foreach ($data as $dkey => $d) {
             foreach ($timestamps as $key) {
                 $timestamp = $d[$key];
-                $data[$dkey][$key] = \Carbon\Carbon::createFromTimestamp($timestamp / 1000, $timezone);
+                if (isset($data[$dkey][$key])) {
+                    $data[$dkey][$key] = \Carbon\Carbon::createFromTimestamp($timestamp / 1000, $timezone);
+                }
             }
         }
 

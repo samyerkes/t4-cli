@@ -40,6 +40,7 @@ class NotificationGet extends Command
      */
     protected $fields = [
         "id",
+        "user",
         "notificationType",
         "notificationStatus",
         "createdTime",
@@ -54,7 +55,6 @@ class NotificationGet extends Command
      */
     protected $optionalFields = [
         "scheduled",
-        "user",
         "log",
         "type"
     ];
