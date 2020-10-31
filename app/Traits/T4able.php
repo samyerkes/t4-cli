@@ -80,6 +80,9 @@ Trait T4able
             case ('navigation'):
                 $url = __('api.navigation.index');
                 break;
+            case ('notification'):
+                $url = __('api.notification.index');
+                break;
             case ('schedule'):
                 $url = __('api.schedule.index');
                 break;

@@ -23,6 +23,9 @@ return [
     'navigation' => [
         'index' => '/navigation'
     ],
+    'notification' => [
+        'index' => '/notifications'
+    ],
     'profile' => '/profile',
     'schedule' => [
         'index' => '/schedule'

@@ -70,8 +70,6 @@ class NavigationGet extends Command
      */
     public function handle()
     {
-        $this->getOptions();
-
         $data = $this->getDetails('navigation', $this->argument('details'));
 
         $factory = new NavigationFactory();
