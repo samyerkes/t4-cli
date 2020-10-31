@@ -30,6 +30,9 @@ return [
     'schedule' => [
         'index' => '/schedule'
     ],
+    'section' => [
+        'show' => '/hierarchy/:section/en'
+    ],
     'transfer' => [
         'index' => '/transfer'
     ],

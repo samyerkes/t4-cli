@@ -2,7 +2,6 @@
 
 namespace App\Factories;
 
-use App\Command;
 use App\Models\ContentType;
 use App\Traits\T4able;
 

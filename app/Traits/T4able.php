@@ -22,28 +22,6 @@ Trait T4able
 
         return collect($response->json());
     }
-
-    public function findUserID($details)
-    {
-        $url = '/user';
-        $data = $this->sendRequest($url);
-        $data = $data->filter(function($d) use ($details) {
-            return $d['username'] == $details;
-        });
-        $data = array_values($data->toArray());
-        return $data[0]['id'];
-    }
-
-    public function findGroupID($details)
-    {
-        $url = '/group';
-        $data = $this->sendRequest($url);   
-        $data = $data->filter(function($d) use ($details) {
-            return $d['name'] == $details;
-        });
-        $data = array_values($data->toArray());
-        return $data[0]['id'];
-    }
     
     // Return a collection of attributes based on the model type and and needle type detail you provide.
     public function getDetails($model, $detail)
@@ -86,6 +64,9 @@ Trait T4able
             case ('schedule'):
                 $url = __('api.schedule.index');
                 break;
+            case ('section'):
+                $url = __('api.section.show', ['section' => $detail[0]]);
+                break;
             case ('transfer'):
                 $url = __('api.transfer.index');
                 break;
@@ -99,6 +80,8 @@ Trait T4able
         }
         
         $data = $this->sendRequest($url);  
+
+        if ($model == 'section') return $data;
 
         // Get microsites of channels, this is kinda lame / a hack and could be cleaned up.
         if ($model == 'channelmicrosite') {
