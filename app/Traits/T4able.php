@@ -4,25 +4,9 @@ namespace App\Traits;
 
 use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Http;
 
 Trait T4able
-{
-    // Defaults to a get request if other arguments are not provided
-    public function sendRequest($url, $method='get', $data=[]) {
-        $method = strtolower($method);
-        $t4key = config('t4.token');
-        $t4webapi = config('t4.webapi');
-        $response = Http::withToken($t4key)->$method($t4webapi . $url, $data);
-        
-        if (!$response->ok()) {
-            $this->error($response);
-            die();
-        }
-
-        return collect($response->json());
-    }
-    
+{   
     // Return a collection of attributes based on the model type and and needle type detail you provide.
     public function getDetails($model, $detail)
     {

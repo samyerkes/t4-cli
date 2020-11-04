@@ -29,7 +29,9 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 | t4 user:update       | Updates details about a user                   | {details?*}                                                 | --firstName --lastName --emailAddress --defaultLang --enabled --role --deleted | Success        |
 | t4 whoami            | Displays information about the auth'd user     |                                                             | --fields --format                                                              | Table          |
 
-## Output
+## Global options
+
+### Output
 
 Using the --format flag, you have the ability to format output with the following options:
 
@@ -40,7 +42,7 @@ Using the --format flag, you have the ability to format output with the followin
 * table - returns the results in an easy to read table.
 * text - returns the results for the first text attribute of each returned record. This is similar to the id format.
 
-## Profile
+### Profile
 
 By default the application will use a profile named, "default."
 
@@ -56,6 +58,8 @@ t4_token="xxxxxxxxx"
 To switch your profile just export a new `T4_PROFILE` variable.
 
 ```export T4_PROFILE=profileName```
+
+Or you can use the `--profile=` or `-p` flag to switch your profile for a one off command.
 
 ## Command chaining
 
