@@ -43,25 +43,39 @@ class ContentTypesReport extends Command
     protected $fields = [
         "section",
         "content",
+<<<<<<< HEAD
         "name",
         "lastModified",
         "lastModifiedBy",
     ];
     
+=======
+        "name"
+    ];
+
+>>>>>>> 76a31c7d0877004091df40f9ba27e21307a80235
     /**
      * The optional fields the command will return.
      *
      * @var array
      */
     protected $optionalFields = [
+<<<<<<< HEAD
+=======
+        "lastModified",
+        "lastModifiedBy",
+>>>>>>> 76a31c7d0877004091df40f9ba27e21307a80235
         "sectionPath",
         "status",
         "orphaned"
     ];
+<<<<<<< HEAD
     
     protected $timestampFields = [
         "lastModified",
     ];
+=======
+>>>>>>> 76a31c7d0877004091df40f9ba27e21307a80235
 
     /**
      * Execute the console command.
@@ -107,8 +121,13 @@ class ContentTypesReport extends Command
                     
                 ];
             });
+<<<<<<< HEAD
 
             $this->print($data, $this->timestampFields);
+=======
+    
+            $this->print($data);
+>>>>>>> 76a31c7d0877004091df40f9ba27e21307a80235
 
         }
     }
