@@ -30,6 +30,10 @@ return [
     'schedule' => [
         'index' => '/schedule'
     ],
+    'report' => [
+        'contenttype' => '/contentTypeReport/:id',
+        'contenttypePost' => '/contentTypeReport',
+    ],
     'section' => [
         'show' => '/hierarchy/:section/en'
     ],
