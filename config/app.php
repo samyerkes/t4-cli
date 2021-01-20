@@ -42,8 +42,6 @@ return [
 
     'env' => 'development',
 
-    'timezone' => 'America/New_York',
-
     'lang' => 'en',
 
     /*
@@ -60,6 +58,7 @@ return [
     'providers' => [
         App\Providers\AppServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
+	    \OwenVoke\LaravelZeroDocker\DockerServiceProvider::class,
     ],
 
 ];

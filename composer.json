@@ -16,15 +16,16 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3|^8.0",
         "dnoegel/php-xdg-base-dir": "^0.1.1",
         "guzzlehttp/guzzle": "^6.5.5",
         "illuminate/database": "^8.0",
         "illuminate/http": "^8.0",
         "illuminate/translation": "^8.9",
         "laminas/laminas-text": "^2.7",
-        "laravel-zero/framework": "^8.0",
+        "laravel-zero/framework": "^8.4",
         "nunomaduro/laravel-console-summary": "^1.6",
+        "owenvoke/laravel-zero-docker": "^1.0",
         "padraic/phar-updater": "^1.0.6"
     },
     "require-dev": {
