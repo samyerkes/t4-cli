@@ -8,11 +8,11 @@ class GroupAttach extends Command
 { 
 
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'group:attach {group} {users*}';
+    protected $name = 'group:attach {group} {users*}';
 
     /**
      * The description of the command.
@@ -37,8 +37,8 @@ class GroupAttach extends Command
      */
     public function handle()
     {
-        $group = $this->argument('group');
-        $userDetail = $this->argument('users');
+        $group = $this->argument('details')[0];
+        $userDetail = $this->argument('details')[1];
 
         // Get the group info
         $group = $this->getDetails('group', $group)->first();
@@ -66,6 +66,8 @@ class GroupAttach extends Command
             return $member['id'];
         });
 
+        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
+
         $data = $this->sendRequest($url, 'put', [
             'id' => $group['id'],
             'name' => $group['name'],
@@ -73,7 +75,6 @@ class GroupAttach extends Command
             'members' => $newMembers
         ]);
         
-        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
     }
 
 }
