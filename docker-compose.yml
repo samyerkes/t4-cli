@@ -8,3 +8,4 @@ services:
             - ~/.t4:/root/.t4
         working_dir: /app
         entrypoint: ["php", "t4"]
+        network_mode: "host"
