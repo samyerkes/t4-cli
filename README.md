@@ -44,9 +44,9 @@ Using the --format flag, you have the ability to format output with the followin
 
 ### Profile
 
-By default the application will use a profile named, "default."
+You can use multiple instances of T4 by utilizing the profile option. By default the application will read your .t4 file and use the configuration under a profile named, "default." 
 
-If you want to use multiple instances of T4 you can define additional profiles in your .t4 file. Each profile is defined as:
+Additional profiles can be defined in your .t4 file as:
 
 ```
 [name]
@@ -55,11 +55,13 @@ t4_webapi="https://cms.school.edu/terminalfour/rs"
 t4_token="xxxxxxxxx"
 ```
 
-To switch your profile just export a new `T4_PROFILE` variable.
+To switch your profile set a new `T4_PROFILE` environment variable as the profile you want to use.
 
 ```export T4_PROFILE=profileName```
 
 Or you can use the `--profile=` or `-p` flag to switch your profile for a one off command.
+
+An inline command option for profile will take precence over an environment variable, if neither the inline profile or environment variable is set the 'default' profile will be used.
 
 ## Command chaining
 

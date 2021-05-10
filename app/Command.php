@@ -74,7 +74,7 @@ class Command extends LaravelCommand
         $configurationFileContents = file_get_contents($homedir . '/' . $this->configurationFile);
 
         // a inline command option for profile will take precence over an environment var, if nothing is set 'default' will be used.
-        $profileShortKey = $this->option('profile') ?? $_SERVER['T4_PROFILE'] ?? $this->profile;
+        $profileShortKey = $this->option('profile') ?? getenv('T4_PROFILE') ?? $this->profile;
 
         $profileChunks = explode("\n\n", $configurationFileContents);
 
