@@ -5,6 +5,8 @@ namespace App\Commands\Groups;
 use App\Command;
 use App\Factories\GroupFactory;
 
+use Symfony\Component\Console\Input\InputArgument;
+
 class GroupCreate extends Command
 {
 
@@ -13,9 +15,7 @@ class GroupCreate extends Command
      *
      * @var string
      */
-    protected $signature = 'group:create {name} {description?}
-                            {--enabled=1}
-                            {--emailAddress=}';
+    protected $name = 'group:create';
 
     /**
      * The description of the command.
@@ -35,6 +35,21 @@ class GroupCreate extends Command
         'groups:new',
     ];
 
+    protected $fields = [
+        'name'
+    ];
+
+    /**
+     * The optional fields the command will return.
+     *
+     * @var array
+     */
+    protected $optionalFields = [
+        "description",
+        "emailAddress",
+        "enabled"
+    ];
+
     /**
      * Execute the console command.
      *
@@ -44,8 +59,8 @@ class GroupCreate extends Command
     {
         $data = [
             [
-                'name' => $this->argument('name'),
-                'description' => $this->argument('description'),
+                'name' => $this->argument('details')[0],
+                'description' => $this->option('description'),
                 'emailAddress' => $this->option('emailAddress'),
                 'enabled' => $this->option('enabled')
             ]
@@ -59,6 +74,24 @@ class GroupCreate extends Command
             $this->info(__('actions.create', ['model' => 'Group', 'detail' => $group->name]));
         });
 
+    }
+
+    /**
+     * Get the console command options.
+     * We need to add to the default options so we'll merge these in with the parent::getOptions() method.
+     *
+     * @return array
+     * https://laravel.com/docs/4.2/commands
+     */
+    public function getOptions()
+    {
+        $options = [
+            ['description', null, InputArgument::OPTIONAL, 'If you want to include a group description'],
+            ['emailAddress', null, InputArgument::OPTIONAL, 'If you want to include an email address for the group'],
+            ['enabled', null, InputArgument::OPTIONAL, 'If you want the group to be enabled by default', true]
+        ];
+
+        return array_merge(parent::getOptions(), $options);
     }
 
 }
