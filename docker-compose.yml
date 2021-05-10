@@ -1,0 +1,10 @@
+# docker-compose run --rm t4cli
+version: "3"
+services:
+    t4cli:
+        image: php
+        volumes:
+            - .:/app
+            - ~/.t4:/root/.t4
+        working_dir: /app
+        entrypoint: ["php", "t4"]
