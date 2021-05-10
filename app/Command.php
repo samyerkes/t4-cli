@@ -115,8 +115,7 @@ class Command extends LaravelCommand
         $response = Http::withToken($credentials['token'])->$method($credentials['webapi'] . $url, $data);
         
         if (!$response->ok()) {
-            $this->error($response);
-            die();
+            return $this->error($response);
         }
 
         return collect($response->json());
