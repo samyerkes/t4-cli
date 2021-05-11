@@ -66,14 +66,14 @@ class GroupAttach extends Command
             return $member['id'];
         });
 
-        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
-
         $data = $this->sendRequest($url, 'put', [
             'id' => $group['id'],
             'name' => $group['name'],
             'description' => $group['description'],
             'members' => $newMembers
         ]);
+
+        $this->info(__('actions.update', ['model' => 'Group', 'detail' => $group['name']]));
         
     }
 
