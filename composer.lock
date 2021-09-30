@@ -2005,16 +2005,16 @@
         },
         {
             "name": "laravel-zero/framework",
-            "version": "v8.7.0",
+            "version": "v8.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-zero/framework.git",
-                "reference": "548a5ab0b06c0afc29d2b33fc24da292fb1bea42"
+                "reference": "ca99ce5c5030cbc81bcb61d30cdba23095e4fa20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-zero/framework/zipball/548a5ab0b06c0afc29d2b33fc24da292fb1bea42",
-                "reference": "548a5ab0b06c0afc29d2b33fc24da292fb1bea42",
+                "url": "https://api.github.com/repos/laravel-zero/framework/zipball/ca99ce5c5030cbc81bcb61d30cdba23095e4fa20",
+                "reference": "ca99ce5c5030cbc81bcb61d30cdba23095e4fa20",
                 "shasum": ""
             },
             "require": {
@@ -2048,17 +2048,17 @@
                 "guzzlehttp/guzzle": "^6.5.5|^7.0",
                 "hmazter/laravel-schedule-list": "^2.2.1",
                 "illuminate/bus": "^8.0",
-                "illuminate/database": "^8.0",
+                "illuminate/database": "^8.40",
                 "illuminate/http": "^8.0",
                 "illuminate/log": "^8.0",
                 "illuminate/queue": "^8.0",
                 "illuminate/redis": "^8.0",
                 "laminas/laminas-text": "^2.8",
+                "laravel-zero/phar-updater": "^1.0.6",
                 "nunomaduro/laravel-console-dusk": "^1.8",
                 "nunomaduro/laravel-console-menu": "^3.2",
-                "padraic/phar-updater": "^1.0.6",
-                "pestphp/pest": "^1.0",
-                "phpstan/phpstan": "^0.12.65"
+                "pestphp/pest": "^1.3",
+                "phpstan/phpstan": "^0.12.88"
             },
             "suggest": {
                 "ext-pcntl": "Required to ensure that data is cleared when cancelling the build process."
@@ -2092,7 +2092,7 @@
                 "issues": "https://github.com/laravel-zero/laravel-zero/issues",
                 "source": "https://github.com/laravel-zero/laravel-zero"
             },
-            "time": "2021-04-15T09:30:58+00:00"
+            "time": "2021-06-03T15:51:45+00:00"
         },
         {
             "name": "league/flysystem",
@@ -7614,5 +7614,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

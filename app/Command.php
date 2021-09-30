@@ -78,7 +78,7 @@ class Command extends LaravelCommand
 
         $profileChunks = explode("\n\n", $configurationFileContents);
 
-        $regex = "/(\[$profileShortKey\])/";
+        $regex = "/($profileShortKey)/";
 
         $profile = preg_grep($regex, $profileChunks);
 

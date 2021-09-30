@@ -2,12 +2,10 @@
 version: "3"
 services:
     t4cli:
-        image: php
+        image: t4clibuild
         volumes:
             - .:/app
             - ~/.t4:/root/.t4
         environment:
             - T4_PROFILE=local
-        working_dir: /app
-        entrypoint: ["php", "t4"]
         network_mode: "host"
