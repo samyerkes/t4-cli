@@ -8,11 +8,11 @@ class GroupDetach extends Command
 {  
 
     /**
-     * The signature of the command.
+     * The name of the command.
      *
      * @var string
      */
-    protected $signature = 'group:detach {group} {users*}';
+    protected $name = 'group:detach {group} {users*}';
 
     /**
      * The description of the command.
@@ -37,8 +37,8 @@ class GroupDetach extends Command
      */
     public function handle()
     {
-        $group = $this->argument('group');
-        $userDetail = $this->argument('users');
+        $group = $this->argument('details')[0];
+        $userDetail = $this->argument('details')[1];
 
         // Get the group info
         $group = $this->getDetails('group', $group)->first();
