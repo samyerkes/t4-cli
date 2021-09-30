@@ -88,6 +88,11 @@ Delete all users that belong to a particular group
 t4 user delete $(t4 group:members "My group" --format=id)
 ```
 
+Add a user to the same groups that another user is a part of
+```
+for group in $(t4 user:groups user1 --format=id); do t4 group:attach $group user2; done
+```
+
 ## Labels
 
 Each `get` command comes with default returned attributes, but there may be circumstances where you need to use other fields. To find out the available fields you can use, pass the `-l` or `--labels` option to print the fields available to that command.
