@@ -31,6 +31,14 @@ The focus of this tool is the management of the SiteManager CMS from Terminalfou
 
 ## Global options
 
+### Dry run
+
+Use the `--dry-run` flag to run the operation and show the output, but not actually send the request to the application.
+
+```
+t4 group:create my-test-group "My test group" --dry-run
+```
+
 ### Output
 
 Using the --format flag, you have the ability to format output with the following options:

@@ -56,6 +56,7 @@ class Command extends LaravelCommand
     public function getOptions()
     {
         return [
+            ['dry-run', null, InputOption::VALUE_NONE, 'Run the operation and show report, but send the request to the application'],
             ['fields', null, InputOption::VALUE_OPTIONAL, 'Return specific fields from a record', $this->fields],
             ['filters', null, InputOption::VALUE_OPTIONAL, 'Return only certain records that match a particular filter'],
             ['format', null, InputOption::VALUE_OPTIONAL, 'Return the records in a specific format', $this->format],
@@ -111,6 +112,8 @@ class Command extends LaravelCommand
         $credentials = $this->getProfileCredentials();
 
         $method = strtolower($method);
+
+        if ($this->option('dry-run')) return;
         
         $response = Http::withToken($credentials['token'])->$method($credentials['webapi'] . $url, $data);
         
