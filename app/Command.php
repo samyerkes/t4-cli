@@ -113,7 +113,7 @@ class Command extends LaravelCommand
 
         $method = strtolower($method);
 
-        if ($this->option('dry-run')) return;
+        if ($this->option('dry-run') && $method !== 'get') return;
         
         $response = Http::withToken($credentials['token'])->$method($credentials['webapi'] . $url, $data);
         
