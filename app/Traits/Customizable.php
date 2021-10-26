@@ -9,16 +9,13 @@ Trait Customizable
         return explode(',', $input);
     }
 
-    public function filter($input) 
-    {
-        return explode(':', $input);
-    }
-
     public function getFilteredContent($data, $filter) : array
     {
         if (!$filter) {
             return is_array($data) ? $data : $data->toArray();
         }
+
+        $filter = explode(':', $filter);
 
         $data =  $data->filter(function ($d) use ($filter) {
             list($attr, $val) = $filter;

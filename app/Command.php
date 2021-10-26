@@ -58,7 +58,7 @@ class Command extends LaravelCommand
         return [
             ['dry-run', null, InputOption::VALUE_NONE, 'Run the operation and show report, but send the request to the application'],
             ['fields', null, InputOption::VALUE_OPTIONAL, 'Return specific fields from a record', $this->fields],
-            ['filters', null, InputOption::VALUE_OPTIONAL, 'Return only certain records that match a particular filter'],
+            ['filter', null, InputOption::VALUE_OPTIONAL, 'Return only certain records that match a particular filter'],
             ['format', null, InputOption::VALUE_OPTIONAL, 'Return the records in a specific format', $this->format],
             ['labels', '-l', InputOption::VALUE_NONE, 'Return all default and optional fields for a command'],
             ['order', null, InputOption::VALUE_OPTIONAL, 'Order the returned records in asc or desc order', $this->order],
@@ -148,7 +148,7 @@ class Command extends LaravelCommand
         
         if (count($data)) {
 
-            $data = $this->getFilteredContent($data, $this->option('filters'));
+            $data = $this->getFilteredContent($data, $this->option('filter'));
 
             $data = $this->getFieldsOfContent($data, $this->option('fields'));
 
